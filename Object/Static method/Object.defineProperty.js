@@ -23,4 +23,13 @@ Object.defineProperty(a,'love',{
         set 默认undefind  当属性被修改时触发的方法 */
 })
 a.love = 666
-console.log(a.love)
+Object.defineProperty(a,'smart',{
+    value:123,
+    enumerable:true
+})
+Object.defineProperty(a,'cute',{
+    value:234
+})
+console.log(Object.keys(a))
+console.log(Object.getOwnPropertyNames(a))
+// getOwnPropertyNames 可以把对象的不可枚举的属性枚举出来
