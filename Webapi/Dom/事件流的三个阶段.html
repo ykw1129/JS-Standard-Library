@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #father{
+            width: 500px;
+            margin: auto;
+            height: 500px;
+            position: relative;
+            background-color: seagreen;
+            transform: translateY(50%);
+        }
+        #son{
+            width: 200px;
+            position: absolute;
+            height: 200px;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            display: block;
+            background: #000;
+        }   
+    </style>
+
+</head>
+<body>
+    <div id="father">
+        <div id="son"></div>
+    </div>
+    <script>
+        let father = document.getElementById("father")
+        let son = document.getElementById("son")
+        son.addEventListener('click',function(){
+            alert(son)
+        })
+        father.addEventListener('click',function(){
+            alert(father)
+        })
+    </script>
+</body>
+</html>
