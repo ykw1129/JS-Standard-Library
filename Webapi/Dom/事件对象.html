@@ -7,15 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <div></div>
+    <div>123123</div>
     <script>
         let div = document.getElementsByTagName("div")[0]
         div.onclick = function(e){
             //console.log(e) 这样在ie8上会出问题   应该用window.event
             e = e||window.event //这样就完美的处理兼容性了
             console.log(e);
-
+            console.log(e.target);
+            
         }
+        //e.target 返回触发事件的元素
+        // this  那个元素绑定了这个点击事件，那么就返回谁  ul.addEventListener()  返回ul 而不是点击的元素
+
     </script>
 </body>
 </html>
