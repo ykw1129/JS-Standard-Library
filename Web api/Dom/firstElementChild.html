@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ol>
+        <li>123333</li>
+        <li>123</li>
+        <li>123</li>
+    </ol>
+    <script>
+        let ol = document.getElementsByTagName("ol")[0]
+        console.log(ol.firstElementChild);
+        // firstElementChild方法IE9才支持
+        console.log(ol.children[0])
+        // 所以比较推荐使用children[0]
+    </script>
+</body>
+</html>
