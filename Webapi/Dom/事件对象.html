@@ -19,7 +19,7 @@
         }
         //e.target 返回触发事件的元素
         // this  那个元素绑定了这个点击事件，那么就返回谁  ul.addEventListener()  返回ul 而不是点击的元素
-
+        // IE6-8  是不存在target这个属性的 需要采用 let target = e.target||e.srcElement 兼容性处理
     </script>
 </body>
 </html>

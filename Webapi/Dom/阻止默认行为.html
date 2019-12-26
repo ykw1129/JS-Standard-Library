@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        1231231231
+    </div>
+    <script>
+        let div = document.getElementsByTagName("div")[0]
+        // 1,阻止默认行为  跳转 提交
+        div.addEventListener('click',function(){
+            e.preventDefault();
+        })
+        // 2,阻止默认方式
+        div.onclick = function(){
+            // 普通浏览器
+            e.preventDefault()
+            // 低版本浏览器 ie6-8
+            e.returnValue
+            // 传统方式 无兼容性问题
+            return false
+        }
+    </script>
+</body>
+</html>
