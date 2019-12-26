@@ -37,11 +37,18 @@
         let father = document.getElementById("father")
         let son = document.getElementById("son")
         son.addEventListener('click',function(){
-            alert(son)
+            alert("son")
         })
         father.addEventListener('click',function(){
-            alert(father)
+            alert("father")
         })
+        son.addEventListener('click',function(){
+            alert("son")
+        },true)
+        // true表示函数在捕获阶段触发
+        father.addEventListener('click',function(){
+            alert("father")
+        },true)
     </script>
 </body>
 </html>
