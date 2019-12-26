@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        span {
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text">
+    <input type="button" value="提交">
+    <ul>
+
+    </ul>
+    <script>
+        let text = document.getElementsByTagName("input")[0]
+        let button = document.getElementsByTagName("input")[1]
+        let ul = document.getElementsByTagName("ul")[0]
+        button.onclick = function (e) {
+            let li = document.createElement("li")
+            li.innerHTML = text.value + '<a href="javascript:;">删除</a>';
+            ul.insertBefore(li, ul.children[0]);
+            let span = document.getElementsByTagName("a")
+            for (let i = 0; i < span.length; i++) {
+                span[i].onclick = function () {
+                    ul.removeChild(this.parentNode)
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

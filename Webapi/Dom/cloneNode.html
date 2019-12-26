@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        let li1 = document.getElementsByTagName("li")[0]
+        let clonenode = li1.cloneNode(true)
+        let ul = document.getElementsByTagName("ul")[0]
+        // ul.insertBefore(clonenode,ul.children[ul.length])
+        ul.appendChild(clonenode)
+    </script>
+</body>
+</html>
