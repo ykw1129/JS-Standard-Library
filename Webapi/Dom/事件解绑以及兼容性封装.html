@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>btn.onclick = null</button>
+    <button>removeEventListener</button>
+    <script>
+        let btn1 = document.getElementsByTagName("button")[0]
+        let btn2 = document.getElementsByTagName("button")[1]
+        btn1.onclick = function () {
+            alert("即将解绑事件")
+            btn1.onclick = null
+            // 这是解绑事件的第一种写法
+        }
+        btn2.addEventListener('click', fn)
+
+        function fn() {
+            alert("即将解绑事件")
+            btn2.removeEventListener('click',fn)
+        }
+        // 在ie9之前的方式
+        btn3.attachEvent('onclick',fn1)
+        function fn1(){
+            alert("即将解绑事件")
+            btn3.deleteEvent('onclick',fn1)
+        }
+        // 兼容性封装
+        function removeEventListenner(element,elementName,fn){
+            // 判断当前浏览器是否支持removeEventListener 方法
+            if(element.removeEventListener){
+                element.removeEventListener(eventName,fn);
+            }else if(element.detachEvent){
+                element.deleteEvent('on'+eventName,fn);
+            }else{
+                element['on'+eventName] = null
+            }
+        }
+    </script>
+</body>
+
+</html>
