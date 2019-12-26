@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ol>
+        <li>123333</li>
+        <li>123</li>
+        <li>123</li>
+    </ol>
+    <script>
+        let ol = document.getElementsByTagName("ol")[0]
+        console.log(ol.firstElementChild);
+        console.log(ol.children[0].nextElementSibling)
+        console.log(ol.children[0].nextSibling);
+        console.log(getNextElementSibling(ol.children[0]));
+        
+        // 可以封装一个函数解决兼容性问题
+        function getNextElementSibling(element){
+            var el = element
+            while(el = el.nextSibling){
+                if(el.nodeType ===1){
+                    return el
+                }
+            }
+        }
+    </script>
+</body>
+</html>
