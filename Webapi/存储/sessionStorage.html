@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <button class="set">存储数据</button>
+    <button class="get">获取数据</button>
+    <button class="remo">删除数据</button>
+    <button class="del">清空所有数据</button>
+    <script>
+        let ipt = document.querySelector("input")
+        let set = document.getElementsByClassName("set")[0]
+        let get = document.getElementsByClassName("get")[0]
+        let remo = document.getElementsByClassName("remo")[0]
+        let del = document.getElementsByClassName("del")[0]
+        set.addEventListener('click',function(){
+            let val = ipt.value
+            sessionStorage.setItem('username',val)
+        })
+        get.addEventListener('click',function(){
+            let getval = sessionStorage.getItem('username')
+            console.log(getval)
+        })
+        remo.addEventListener('click',function(){
+            sessionStorage.removeItem('username')
+        })
+        del.addEventListener('click',function(){
+            sessionStorage.clear()
+            // 清空所有sessionStorage
+        })
+        // sessionStorage存储的数据关闭窗口就没有了
+    </script>
+</body>
+</html>

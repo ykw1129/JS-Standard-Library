@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        width: 100px;
+        height: 100px;
+        background-color: hotpink;
+        position: absolute;
+    }
+    </style>
+</head>
+<body>
+    <div>
+
+    </div>
+    <script>
+    /* 
+    touches 正在触摸屏幕的所有手指的一个列表
+    targetTouches 正在触摸当前Dom元素上的手指的一个列表
+    changedTouches 手指状态
+     */
+     let div = document.querySelector("div")
+     let startX = 0
+     let startY = 0
+     div.addEventListener('touchstart',function(e){
+         startX = e.targetTouches[0].pageX-div.offsetLeft
+         startY = e.targetTouches[0].pageY-div.offsetTop
+         this.addEventListener('touchmove',move)
+         function move(e){
+               let x =  e.targetTouches[0].pageX-startX
+               let y = e.targetTouches[0].pageY -startY
+               this.style.left = x+'px'
+               this.style.top = y+'px'
+         }
+         this.addEventListener('touchend',function(){
+             this.removeEventListener('touchmove',move)
+         })
+     })
+    </script>
+</body>
+</html>
