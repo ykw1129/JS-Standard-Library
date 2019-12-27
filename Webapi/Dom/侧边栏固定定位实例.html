@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            height: 2000px;
+            width:1000px;
+            margin: auto;
+            background-color: green;
+            text-align: center;
+
+        }
+        aside{
+            transition: all 2s;
+            position: absolute;
+            top: 200px;
+            right: 100px;
+            height: 200px;
+            width: 50px;
+            background-color: rosybrown;
+        }
+    </style>
+
+</head>
+<body>
+    <div>div区域</div>
+    <aside>
+
+    </aside>
+    <script>
+        let div = document.querySelector("div")
+        let aside = document.querySelector("aside")
+        document.addEventListener('scroll',function(e){
+            let top = aside.offsetTop
+            if(window.pageYOffset>=top){
+                aside.style.position = 'fixed'
+                
+            }else{
+                aside.style.position = 'absolute'
+
+            }
+        })
+/*         1,声明了DTD，使用document.documentElement.scrollTop
+        2,未声明DTD，使用document.body.scrollTop
+        3,新方法window.pageXOffset和window.pageYOffset,IE9才支持 */
+        // 兼容性解决方案
+        function getScroll(){
+            return {
+                left:window.pageXOffset ||document.documentElement.scrollLeft||document.body.scrollLeft||0,
+                top:window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop||0
+            }
+        }
+    </script>
+
+
+</body>
+</html>
