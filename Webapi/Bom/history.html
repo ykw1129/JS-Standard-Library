@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>back()</div>
+    <div>forward</div>
+    <div>go(参数)</div>
+</body>
+    <script>
+        let div = []
+        for(let i = 0 ;i<3 ;i++){
+                div[i] = document.getElementsByTagName("div")[i]  
+        }
+        div[0].onclick = function(){
+            history.back()
+        }
+        div[1].onclick = function(){
+            history.forward()
+        }
+        div[2].onclick = function(){
+            history.go(1) //正为前进  负为后退
+        }
+    </script>
+</html>
