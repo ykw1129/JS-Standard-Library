@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+      
+/*         window.onload = function(){
+            let btn = document.getElementsByTagName("button")[0]
+            btn.addEventListener('click',function(){
+                alert("点击了btn")
+            })
+        } */
+        // 采用window.onload的方式只能绑定一个函数
+        window.addEventListener('load',function(){
+            btn.addEventListener('click',function(){
+                alert("点击了btn")
+            })
+        })
+        window.addEventListener('load',function(){
+            alert("load事件")
+        })
+        // 采用addEventListener的load同一元素绑定多个函数
+        // DOMContentLoaded事件IE9以上才支持 ，效果比load好
+        // load 等页面内容加载完毕，包含页面dom元素 图片 flash css 等等
+        // DOMContentLoaded 是Dom加载完毕，不包含图片 flash css
+        document.addEventListener('DOMContentLoaded',function(){
+            alert("dom元素加载完，就触发！")
+        })
+    </script>
+</head>
+<body>
+    <button>窗口加载事件</button>
+
+</body>
+</html>
