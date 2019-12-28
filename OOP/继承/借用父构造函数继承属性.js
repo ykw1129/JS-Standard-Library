@@ -4,9 +4,10 @@ function Father(name,age){
     this.name = name
     this.age = age
 }
-function Son(name,age){
+function Son(name,age,score){
     // this指向子构造函数的对象实例
     Father.call(this,name,age)
+    this.score = score
 }
 var son = new Son('张三',18)
 console.log(son)
