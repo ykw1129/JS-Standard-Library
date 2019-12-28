@@ -79,7 +79,9 @@
 
             }
             // 初始化
-            toggleTab(){
+            toggleTab(e){
+                // e.stopImmediatePropagation() 阻止事件捕获 (Dom3)
+                // e.stopPropagation()阻止事件冒泡
                 console.log(this.index)
                 this.className = 'red'
                 let siling = Siling(this)
@@ -97,7 +99,7 @@
                 that.init()
 
             }
-            deleteTab(){
+            deleteTab(e){
                 that.ul.removeChild(this.parentNode)
             }
         }
