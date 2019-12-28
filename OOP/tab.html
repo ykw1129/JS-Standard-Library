@@ -36,6 +36,14 @@
         <li><span>我是span</span><button>删除</button></li>
     </ul>
     <script type="module">
+        // 使用element.insertAdjacentHTML(position,text)进行字符串拼接比较快
+         /* position ：  元素自身前 beforebegin
+                        元素自身后 afterend
+                        元素内部第一个子元素之前 afterbegin
+                        元素内部第一个子元素之后  beforeend
+          */
+
+
         function Siling(element){//封装一个获取所有兄弟元素的函数
             let allSilingNode = []
 
@@ -57,6 +65,7 @@
                 this.li = this.ul.getElementsByTagName("li")
                 this.addbutton = document.getElementById("add")
                 this.buttons = this.ul.getElementsByTagName("button")
+
                 this.init()
                 
             }
