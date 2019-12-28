@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .red {
+        background-color: red;
+    }
+
+    ul {
+        display: flex;
+        list-style-type: none;
+        padding: 0;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
+
+    ul li {
+        text-align: center;
+        width: 300px;
+        background-color: greenyellow;
+    }
+</style>
+
+<body>
+    <input id="add" type="button" value="添加">
+    <ul id="ul">
+        <li><span>我是span</span><button>删除</button></li>
+        <li><span>我是span</span><button>删除</button></li>
+        <li><span>我是span</span><button>删除</button></li>
+        <li><span>我是span</span><button>删除</button></li>
+    </ul>
+    <script type="module">
+        function Siling(element){//封装一个获取所有兄弟元素的函数
+            let allSilingNode = []
+
+            let allNode = element.parentNode.children
+            for(let i =0;i<allNode.length;i++){
+                if(allNode[i].nodeType ==1&&allNode[i]!=element){
+                    allSilingNode.push(allNode[i])
+                }
+            }
+            return allSilingNode
+
+        }
+        var that
+        class Tab{
+            // 构造函数获取元素
+            constructor(id){
+                that = this
+                this.ul = document.getElementById(id)
+                this.li = this.ul.getElementsByTagName("li")
+                this.addbutton = document.getElementById("add")
+                this.buttons = this.ul.getElementsByTagName("button")
+                this.init()
+                
+            }
+            init(){
+                for(let i = 0;i<this.li.length;i++){
+                    this.li[i].index = i
+                    this.li[i].onmousedown = this.toggleTab
+                    this.buttons[i].onclick = this.deleteTab
+                    this.addbutton.onclick = this.addTab
+                }
+
+            }
+            // 初始化
+            toggleTab(){
+                console.log(this.index)
+                this.className = 'red'
+                let siling = Siling(this)
+                for(let i=0;i<siling.length;i++){
+                    siling[i].classList.remove('red')
+            }
+            }
+            addTab(){
+                
+                let newLi = document.createElement("li")
+                let newHtml = '<span>我是span</span><button>删除</button>'
+                newLi.index = that.li.length
+                newLi.innerHTML = newHtml
+                that.ul.append(newLi)
+                that.init()
+
+            }
+            deleteTab(){
+                that.ul.removeChild(this.parentNode)
+            }
+        }
+        let tab1 = new Tab("ul")
+    </script>
+</body>
+
+</html>
