@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <button>提交</button>
+    <script>
+        let [input,button,body] = [document.getElementsByTagName("input")[0],document.getElementsByTagName("button")[0],document.getElementsByTagName("body")[0]]
+        button.addEventListener('click',function(e){
+            e.preventDefault()
+            if(input.value.trim()==''){
+                alert("用户名不能为空")
+            }else{
+                let html ='<p>'+input.value.trim()+'</p>'
+                body.insertAdjacentHTML('beforeend',html)
+                
+            }
+        })
+    </script>
+</body>
+</html>

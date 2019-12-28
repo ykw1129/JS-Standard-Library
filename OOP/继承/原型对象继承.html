@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Father(name, age) {
+            // this指向父构造函数的对象实例
+            this.name = name
+            this.age = age
+        }
+        Father.prototype.eat = function () {
+            console.log('eat')
+        }
+
+
+        function Son(name, age, score) {
+            // this指向子构造函数的对象实例
+            Father.call(this, name, age)
+            this.score = score
+        }
+        Son.prototype = new Father()  //Son的prototype的__proto__指向了Father实例的prototype 
+        Son.prototype.constructor = Son
+        Son.prototype.exam = function(){
+            console.log('儿子去考试')
+        }
+        console.log(Son.prototype,Father.prototype);
+        let son1 = new Son('小米',14,100)
+        son1.exam()
+        son1.eat()
+        
+    </script>
+</body>
+
+</html>
