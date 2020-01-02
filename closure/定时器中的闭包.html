@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>小明</li>
+        <li>小帅</li>
+        <li>小虎</li>
+        <li>小亮</li>
+    </ul>
+    <script>
+        let li = document.querySelector("ul").querySelectorAll("li")
+        for(let i=0;i<li.length;i++){
+            // for循环是立即执行的 所以里面的定时器要用闭包
+            (function(i){
+                setTimeout(function(){
+                    console.log(li[i]);
+                },3000)
+            })(i)
+        }
+        (function(){
+            let start =13
+            let sum = 0
+            return {
+                price:function(n){
+                    if(n<3){
+                        sum = start
+                    }else{
+                        sum = start+5*(n-3)
+                    }
+                }
+
+            }
+        })()
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>小明</li>
+        <li>小帅</li>
+        <li>小虎</li>
+        <li>小亮</li>
+    </ul>
+    <script>
+        // 1、利用动态添加索引
+        let li = document.querySelector("ul").querySelectorAll("li")
+        for(let i=0;i<li.length;i++){
+            li[i].index =i
+            li[i].onclick =function(){
+                console.log(this.index)
+            }
+        }
+        // 2.利用闭包得到索引号
+        for(let i=0;i<li.length;i++){
+            // 利用立即执行函数
+            // 立即执行函数也称为小闭包 因为立即执行函数里面的任何一个函数都可以使用它的i这个变量
+            (function(i){
+                li[i].onclick = function(){
+                    console.log(i)
+                }
+            })(i)
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn(){
+            let num =1 
+            return function add(x){
+                console.log(x+num)
+            }
+            
+        }
+        fn()(2)
+        function f1(){
+            let num =1 
+            return function add(){
+                console.log(1+num)
+            }()
+            
+        }
+        f1()
+        // 闭包的作用：延伸的变量的作用范围，等所有函数调用完了才会销毁
+        </script>
+</body>
+</html>

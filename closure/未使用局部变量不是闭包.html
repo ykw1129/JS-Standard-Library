@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let name = "window";
+        let bject = {
+            name: "object",
+            getobject: function () {
+                return function () {
+                    return this.name;
+                };
+            }
+        };
+        console.log(bject.getobject()())
+        // 匿名函数return的是window,因为没有调用作用域的变量，所以没有形成闭包
+    </script>
+</body>
+
+</html>
