@@ -18,7 +18,8 @@ mongoose.connect('mongodb://localhost/mongodbtest',{useNewUrlParser:true,useUnif
 
     const course = new Course({
         name:'ykw',
-        alive:true
+        alive:true,
+        age:100
     })
 
 course.save()
