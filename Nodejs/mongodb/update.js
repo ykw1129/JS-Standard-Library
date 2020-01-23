@@ -14,8 +14,7 @@ mongoose.connect('mongodb://localhost/mongodbtest',{useNewUrlParser:true,useUnif
     },{versionKey: false})
     //{versionKey: false} 是不需要mongodb的_v(版本字段)
     const Course = mongoose.model('Course',courseSchema)
-
-Course.findOneAndDelete({}).then(result=>{console.log(result)})
-// 删除单个  接收一个对象，为查询条件  返回删除的文档  如果查询条件匹配了多个文档 那么将会删除第一个匹配的文档
-Course.deleteMany({}).then(result=>{console.log(result)})
-// 删除多个
+// 更新集合中的文档 更新单个 查询条件如果为空 匹配第一个
+    Course.ipdateOne({查询条件},{要修改的值}).then(result=>{console.log(result)})
+// 更新集合中的文档 更新多个 查询条件如果为空 匹配所有
+     Course.ipdateMany({查询条件},{要修改的值}).then(result=>{console.log(result)})
