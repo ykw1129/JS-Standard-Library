@@ -14,10 +14,17 @@ mongoose.connect('mongodb://localhost/mongodbtest',{useNewUrlParser:true,useUnif
     },{versionKey: false})
     //{versionKey: false} 是不需要mongodb的_v(版本字段)
     const Course = mongoose.model('Course',courseSchema)
-    
-    // 往集合中插入数据
-    Course.create({name:'yo',alive:false},(err,result)=>{
-        console.log(err)
+/* 
+    Course.find().then(result=>{
+        // 查询用户集合中的所有文档
         console.log(result)
-        // 当前插入的数据
+    }) */
+    // 根据条件查询满足条件项
+    Course.find({name:'yy'}).then(result=>{
+        console.log(result)
     })
+// 根据条件查询第一项满足条件的
+    Course.findOne({name:'yo'}).then(result=>{
+        console.log(result)
+    })
+
