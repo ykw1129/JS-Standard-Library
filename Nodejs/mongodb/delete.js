@@ -29,4 +29,6 @@ mongoose.connect('mongodb://localhost/mongodbtest',{useNewUrlParser:true,useUnif
     })
 
 Course.findOneAndDelete({}).then(result=>{console.log(result)})
-// 删除单个
+// 删除单个  接收一个对象，为查询条件  返回删除的文档  如果查询条件匹配了多个文档 那么将会删除第一个匹配的文档
+Course.deleteMany({}).then(result=>{console.log(result)})
+// 删除多个
