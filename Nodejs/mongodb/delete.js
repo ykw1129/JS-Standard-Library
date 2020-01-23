@@ -28,16 +28,5 @@ mongoose.connect('mongodb://localhost/mongodbtest',{useNewUrlParser:true,useUnif
         console.log(result)
     })
 
-// 查找匹配想项
-    Course.find({age:{$gt:20,$lt:50}}).then(result=>console.log(result))
-// 寻找age字段 值大于20小于50的匹配项  $gt是大于 $lt是小于
-Course.find(name:{$in:['敲代码']}).then(result=>console.log(result))
-// 寻找name字段 值数组中含有敲代码  $in是大于
-Course.find().select('name email _id').then(result=>{console.log(result)}) 
-// select 选择要查询的字段
-Course.find().sort('age').then(result=>console.log(result))
-// 按照年龄进行升序排序
-Course.find().sort('-age').then(result=>console.log(result))
-// 按照年龄进行升序降序
-Course.find().skip(2).limit(2).then(result=>console.log(result))
-// skip跳过多少文档  limit限制显示多少文档
+Course.findOneAndDelete({}).then(result=>{console.log(result)})
+// 删除单个
