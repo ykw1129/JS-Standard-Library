@@ -28,5 +28,40 @@ mongoose.connect('mongodb://localhost/mongodbtest',{useNewUrlParser:true,useUnif
             default:Date.now
             //默认当前时间
         }
+        ，
+        string：{
+            type:String,
+            enum:['a','b','c','d']
+            // 值只能从这几个值中选
+        }
+        auther:{
+            type:String,
+            validate:{
+                validate:v=>{
+                    // 返回布尔值
+                    // true 验证成功
+                    // false 验证失败
+                    // v 要验证的值
+                    return v&&v.length > 4
+                },
+                // 自定义验证规则
+                message:'传入的值不符合规范'
+                
+            }
+        }
         alive:Boolean
     },{versionKey: false})
+
+    const Course = mongoose.model('Course',courseSchema)
+    
+Course.create({name:'ykw',alive:true,age:100})
+    .then(result=>{console.log(result)})
+    .catch(err=>{
+        const err = err.errors;
+        // 获取错误信息对象
+        for (const attr in err) {
+            // 循环错误信息
+            console.log(err[attr]['message'])
+            // 打印错误信息
+        }
+    })
