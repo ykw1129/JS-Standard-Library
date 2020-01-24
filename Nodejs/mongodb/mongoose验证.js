@@ -31,7 +31,11 @@ mongoose.connect('mongodb://localhost/mongodbtest',{useNewUrlParser:true,useUnif
         ，
         string：{
             type:String,
-            enum:['a','b','c','d']
+            enum:{
+                values:['a','b','c','d'],
+                message:'分类名称要在一定的范围内才可以'
+            }
+            // enum:['a','b','c','d']
             // 值只能从这几个值中选
         }
         auther:{
