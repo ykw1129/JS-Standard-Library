@@ -1,3 +1,4 @@
+// 非关系型数据库
 // 用户集合
 const User = mongoose.model('User',new mongoose.Schema({name:{type:String}}));
 // 文章集合
