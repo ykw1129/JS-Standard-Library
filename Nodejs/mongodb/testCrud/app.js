@@ -47,60 +47,37 @@ app.on('request', async (req, res) => {
     if (method == 'GET') {
 
         if (pathname == '/list') {
-            // 呈现用户列表页面
+            //TODO: 呈现用户列表页面
             let users = await User.find();
             console.log(users)
             let list = `<!DOCTYPE html>
-        <html lang="en">
-        
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>Document</title>
-            <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-                integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        </head>
-        
-        <body>
-        
-        <div class="container">
-            <h6>
-                <a href="add.html" class="btn btn-primary">添加用户</a>
-            </h6>
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>用户名</th>
-                        <th>年龄</th>
-                        <th>爱好</th>
-                        <th>邮箱</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>张三</td>
-                        <td>20</td>
-                        <td>
-                            <span>sing</span>
-                            <span>dance</span>
-                        </td>
-                        <td>123@123.com</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            
-        </div>
-        
-        </body>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
-        </script>
-        
-        </html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+
+<div class="container">
+    <h6>
+        <a href="add.html" class="btn btn-primary">添加用户</a>
+    </h6>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>用户名</th>
+                <th>年龄</th>
+                <th>爱好</th>
+                <th>邮箱</th>
+                <th>操作</th>
+            </tr>
         `;
             res.end(list)
         }
