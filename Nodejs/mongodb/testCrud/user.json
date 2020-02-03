@@ -1,0 +1,23 @@
+
+    {
+        "name": "0001",
+        "age": 19,
+        "password": "ykw1129",
+        "email": "123@email.com",
+        "hobbies": ["read","sing"]
+    }
+    {
+        "name": "0002",
+        "age": 20,
+        "password": "ykw1129",
+        "email": "124@email.com",
+        "hobbies": ["sing"]
+    }
+    {
+        "name": "0003",
+        "age": 21,
+        "password": "ykw1129",
+        "email": "125@email.com",
+        "hobbies": ["read"]
+    }
+    // 使用mongoimport导入的时候需要去掉[]和外层大括号之间的逗号
