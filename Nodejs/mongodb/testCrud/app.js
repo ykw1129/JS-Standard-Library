@@ -78,7 +78,41 @@ app.on('request', async (req, res) => {
                 <th>邮箱</th>
                 <th>操作</th>
             </tr>
+        </thead>
+        <tbody>
         `;
+        // 对数组进行循环操作
+        users.forEach(item=>{
+            list+=`
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.age}</td>
+                <td>`
+                ;
+            item.hobbies.forEach(item=>{
+                list+=`<span>${item}</span>`
+            })
+            list+= `</td>
+                <td>${item.email}</td>
+                <td>
+                    <button type="button" class="btn btn-success">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            `
+        });
+            list += `</tbody>
+        </table>
+        
+    </div>
+    
+    </body>
+    <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
+    
+    </html>`
             res.end(list)
         }
 
