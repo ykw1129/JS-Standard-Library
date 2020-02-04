@@ -115,6 +115,10 @@ app.on('request', async (req, res) => {
     </html>`
             res.end(list)
         }
+        else if(pathname == '/add'){
+            //TODO:加载添加用户界面
+            
+        }
 
     } else if (method == 'POST') {
 
