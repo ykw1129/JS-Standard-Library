@@ -67,7 +67,7 @@ app.on('request', async (req, res) => {
 
 <div class="container">
     <h6>
-        <a href="add.html" class="btn btn-primary">添加用户</a>
+        <a href="/add" class="btn btn-primary">添加用户</a>
     </h6>
     <table class="table table-striped table-bordered">
         <thead>
@@ -117,11 +117,86 @@ app.on('request', async (req, res) => {
         }
         else if(pathname == '/add'){
             //TODO:加载添加用户界面
+            let add = `<!DOCTYPE html>
+            <html lang="en">
             
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <title>Document</title>
+                <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+                    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            </head>
+            
+            <body>
+            
+                <div class="container">
+                    <h3>添加用户</h3>
+                    <form method="post" action="/add">
+                        <div class="form-group">
+                            <label for="">用户名</label>
+                            <input type="text" class="form-control" placeholder="请填写用户名" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="">密码</label>
+                            <input type="password" class="form-control" placeholder="请填写密码" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="">年龄</label>
+                            <input type="number" class="form-control" placeholder="请填写年龄" name="age">
+                        </div>
+                        <div class="form-group">
+                            <label for="">邮箱</label>
+                            <input type="email" class="form-control" placeholder="请填写邮箱" name="email">
+                        </div>
+                        <h4>选择您的爱好</h4>
+                        <div class="checkbox">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="sing" name="hobbies">
+                                唱歌
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="dance" name="hobbies">
+                                跳舞
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="read" name="hobbies">
+                                阅读
+                            </label>
+                        </div>
+                        <button type="submit"  class="btn btn-large btn-inline btn-success">添加用户</button>
+                    </form>
+                </div>
+            
+            
+            </body>
+            <script src="https://cdn.bootcss.com/jquery/2.2.2/jquery.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+            </script>
+            
+            </html>`;
+            res.end(add)
         }
 
     } else if (method == 'POST') {
-
+        // 用户添加功能
+        if(pathname == '/add'){
+            // 接受用户提交的信息
+            // 将用户提交的信息添加到数据库中
+            let FormData = '';
+            // 接收post参数
+            req.on('data',(param)=>{
+                FormData +=param
+            })
+            // post参数接收完毕
+            req.on('end',()=>{
+                console.log(querystring.parse(FormData))
+            })
+            // 将用户提交的信息添加到数据库中
+        }
     }
     res.end('ok')
 })
