@@ -4,9 +4,15 @@
 // 当用户信息和表格HTML进行拼接并将拼接结果响应回客户端
 // 当用户访问/add时，呈现表单页面，并实现添加用户信息功能
 // 当用户访问/modify时，呈现修改页面，并实现修改用户信息功能
+// 修改用户信息分为两大步骤
+// 1、增加页面路由 呈现页面
+// 1、在点击修改按钮的时候 将用户id传递到当前页面
+// 2、从数据库中查询当前用户信息 将用户信息展示到页面中
+// 2、实现用户修改功能
 // 当用户访问/delete时，实现用户删除功能
 const http = require('http');
 const url = require('url')
+const querystring = require("querystring")
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/playground', {
         useUnifiedTopology: true,
@@ -41,8 +47,9 @@ app.on('request', async (req, res) => {
     const method = req.method;
     // 请求地址
     const {
-        pathname
-    } = url.parse(req.url)
+        pathname,
+        query
+    } = url.parse(req.url, true)
     // 判断请求方式
     if (method == 'GET') {
 
@@ -81,41 +88,39 @@ app.on('request', async (req, res) => {
         </thead>
         <tbody>
         `;
-        // 对数组进行循环操作
-        users.forEach(item=>{
-            list+=`
+            // 对数组进行循环操作
+            users.forEach(item => {
+                list += `
             <tr>
                 <td>${item.name}</td>
                 <td>${item.age}</td>
-                <td>`
-                ;
-            item.hobbies.forEach(item=>{
-                list+=`<span>${item}</span>`
-            })
-            list+= `</td>
+                <td>`;
+                item.hobbies.forEach(item => {
+                    list += `<span>${item}</span>`
+                })
+                list += `</td>
                 <td>${item.email}</td>
                 <td>
-                    <button type="button" class="btn btn-success">修改</button>
-                    <button type="button" class="btn btn-danger">删除</button>
+                    <a href="/modify?id=" class="btn btn-success">修改</a>
+                    <a href="" class="btn btn-danger">删除</a>
                 </td>
             </tr>
             `
-        });
+            });
             list += `</tbody>
         </table>
         
     </div>
     
     </body>
-    <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.2.2/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
     </script>
     
     </html>`
             res.end(list)
-        }
-        else if(pathname == '/add'){
+        } else if (pathname == '/add') {
             //TODO:加载添加用户界面
             let add = `<!DOCTYPE html>
             <html lang="en">
@@ -179,26 +184,113 @@ app.on('request', async (req, res) => {
             
             </html>`;
             res.end(add)
+        } else if (pathname == '/modify') {
+            //TODO:加载修改用户界面
+            let user = await User.findOne({
+                _id: query.id
+            })
+            let hobbies = ['sing', 'dance', 'read']
+
+
+            console.log(user)
+            let modify = `<!DOCTYPE html> 
+              <html lang="en">
+              
+              <head>
+                  <meta charset="UTF-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                  <title>Document</title>
+                  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+                  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+                      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+              </head>
+              
+              <body>
+              
+                  <div class="container">
+                      <h3>添加用户</h3>
+                      <form method="post" action="/add">
+                          <div class="form-group">
+                              <label for="">用户名</label>
+                              <input value="${user.name}" type="text"  class="form-control" placeholder="请填写用户名" name="name">
+                          </div>
+                          <div class="form-group">
+                              <label for="">密码</label>
+                              <input value="${user.password}" type="password" class="form-control" placeholder="请填写密码" name="password">
+                          </div>
+                          <div class="form-group">
+                              <label for="">年龄</label>
+                              <input value="${user.age} "type="number" class="form-control" placeholder="请填写年龄" name="age">
+                          </div>
+                          <div class="form-group">
+                              <label for="">邮箱</label>
+                              <input value="${user.email}"type="email" class="form-control" placeholder="请填写邮箱" name="email">
+                          </div>
+                          <h4>选择您的爱好</h4>
+                          <div class="checkbox">
+
+                          `;
+                          
+                          hobbies.forEach(item=>{
+                              //判断当前循环项在不在用户的爱好数组里
+                              let isHobby = user.hobbies.includes(item)
+                              if(isHobby){
+                                  modify+=`
+                                  <label class="checkbox-inline">
+                                  <input type="checkbox" value="${item}" name="hobbies" checked>
+                                  唱歌
+                              </label>`
+                              }else{
+                                  modify+=`
+                                  <label class="checkbox-inline">
+                                  <input type="checkbox" value="${item}" name="hobbies">
+                                  唱歌
+                              </label>`
+                              }
+                          })
+            modify += `</div>
+              <button type="submit"  class="btn btn-large btn-inline btn-success">修改用户</button>
+          </form>
+      </div>
+  
+  
+  </body>
+  <script src="https://cdn.bootcss.com/jquery/2.2.2/jquery.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+  </script>
+  
+  </html>`
+            res.end(modify)
         }
 
     } else if (method == 'POST') {
         // 用户添加功能
-        if(pathname == '/add'){
+        if (pathname == '/add') {
             // 接受用户提交的信息
             // 将用户提交的信息添加到数据库中
             let FormData = '';
             // 接收post参数
-            req.on('data',(param)=>{
-                FormData +=param
+            req.on('data', (param) => {
+                FormData += param
             })
             // post参数接收完毕
-            req.on('end',()=>{
-                console.log(querystring.parse(FormData))
+            req.on('end', async () => {
+                let user = querystring.parse(FormData)
+                // 将用户提交的信息添加在数据库中
+                await User.create(user);
+                // 301代表重定向
+                // location跳转地址
+                res.writeHead(301, {
+                    'Location': '/list'
+                });
+                res.end()
             })
             // 将用户提交的信息添加到数据库中
         }
     }
-    res.end('ok')
+    // res.end('ok')
 })
 // 为服务器对象添加请求事件
 
