@@ -6,9 +6,12 @@
 // 当用户访问/modify时，呈现修改页面，并实现修改用户信息功能
 // 修改用户信息分为两大步骤
 // 1、增加页面路由 呈现页面
-// 1、在点击修改按钮的时候 将用户id传递到当前页面
-// 2、从数据库中查询当前用户信息 将用户信息展示到页面中
+    // 1、在点击修改按钮的时候 将用户id传递到当前页面
+    // 2、从数据库中查询当前用户信息 将用户信息展示到页面中
 // 2、实现用户修改功能
+    // 1、指定表单的提交地址以及请求方式
+    // 2、接受客户端传递过来的修改信息，找到用户 将用户信息更改为最新
+
 // 当用户访问/delete时，实现用户删除功能
 const http = require('http');
 const url = require('url')
@@ -206,7 +209,7 @@ app.on('request', async (req, res) => {
               
                   <div class="container">
                       <h3>添加用户</h3>
-                      <form method="post" action="/add">
+                      <form method="post" action="/modify?id=${user._id}">
                           <div class="form-group">
                               <label for="">用户名</label>
                               <input value="${user.name}" type="text"  class="form-control" placeholder="请填写用户名" name="name">
@@ -217,7 +220,7 @@ app.on('request', async (req, res) => {
                           </div>
                           <div class="form-group">
                               <label for="">年龄</label>
-                              <input value="${user.age} "type="number" class="form-control" placeholder="请填写年龄" name="age">
+                              <input value="${user.age}" type="number" class="form-control" placeholder="请填写年龄" name="age">
                           </div>
                           <div class="form-group">
                               <label for="">邮箱</label>
@@ -235,13 +238,13 @@ app.on('request', async (req, res) => {
                                   modify+=`
                                   <label class="checkbox-inline">
                                   <input type="checkbox" value="${item}" name="hobbies" checked>
-                                  唱歌
+                                  ${item}
                               </label>`
                               }else{
                                   modify+=`
                                   <label class="checkbox-inline">
                                   <input type="checkbox" value="${item}" name="hobbies">
-                                  唱歌
+                                  ${item}
                               </label>`
                               }
                           })
@@ -276,6 +279,28 @@ app.on('request', async (req, res) => {
                 let user = querystring.parse(FormData)
                 // 将用户提交的信息添加在数据库中
                 await User.create(user);
+                // 301代表重定向
+                // location跳转地址
+                res.writeHead(301, {
+                    'Location': '/list'
+                });
+                res.end()
+            })
+            // 将用户提交的信息添加到数据库中
+        }
+        else if(pathname == '/modify'){
+            // 接受用户提交的信息
+            // 将用户提交的信息添加到数据库中
+            let FormData = '';
+            // 接收post参数
+            req.on('data', (param) => {
+                FormData += param
+            })
+            // post参数接收完毕
+            req.on('end', async () => {
+                let user = querystring.parse(FormData)
+                // 将用户提交的信息添加在数据库中
+                await User.updateOne({_id:query.id},user);
                 // 301代表重定向
                 // location跳转地址
                 res.writeHead(301, {
