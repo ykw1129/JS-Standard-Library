@@ -56,7 +56,6 @@ app.on('request', async (req, res) => {
         if (pathname == '/list') {
             //TODO: 呈现用户列表页面
             let users = await User.find();
-            console.log(users)
             let list = `<!DOCTYPE html>
 <html lang="en">
 
@@ -101,7 +100,7 @@ app.on('request', async (req, res) => {
                 list += `</td>
                 <td>${item.email}</td>
                 <td>
-                    <a href="/modify?id=" class="btn btn-success">修改</a>
+                    <a href="/modify?id=${item._id}" class="btn btn-success">修改</a>
                     <a href="" class="btn btn-danger">删除</a>
                 </td>
             </tr>
@@ -190,9 +189,6 @@ app.on('request', async (req, res) => {
                 _id: query.id
             })
             let hobbies = ['sing', 'dance', 'read']
-
-
-            console.log(user)
             let modify = `<!DOCTYPE html> 
               <html lang="en">
               
