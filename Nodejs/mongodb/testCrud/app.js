@@ -104,7 +104,7 @@ app.on('request', async (req, res) => {
                 <td>${item.email}</td>
                 <td>
                     <a href="/modify?id=${item._id}" class="btn btn-success">修改</a>
-                    <a href="" class="btn btn-danger">删除</a>
+                    <a href="/remove?id=${item._id}" class="btn btn-danger">删除</a>
                 </td>
             </tr>
             `
@@ -262,6 +262,13 @@ app.on('request', async (req, res) => {
   
   </html>`
             res.end(modify)
+        }else if(pathname == '/remove'){
+            // res.end(query._id)
+            await User.findByIdAndDelete({_id:query.id})
+            res.writeHead(301,{
+                Location:'/list'
+            });
+            res.end();
         }
 
     } else if (method == 'POST') {
