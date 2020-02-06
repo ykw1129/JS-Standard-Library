@@ -56,7 +56,7 @@ app.on('request', async (req, res) => {
     // 判断请求方式
     if (method == 'GET') {
 
-        if (pathname == '/list') {
+        if (pathname == '/list'||pathname =='/') {
             //TODO: 呈现用户列表页面
             let users = await User.find();
             let list = `<!DOCTYPE html>
@@ -266,7 +266,7 @@ app.on('request', async (req, res) => {
             // res.end(query._id)
             await User.findByIdAndDelete({_id:query.id})
             res.writeHead(301,{
-                Location:'/list'
+                Location:'/'
             });
             res.end();
         }
@@ -289,7 +289,7 @@ app.on('request', async (req, res) => {
                 // 301代表重定向
                 // location跳转地址
                 res.writeHead(301, {
-                    'Location': '/list'
+                    'Location': '/'
                 });
                 res.end()
             })
@@ -311,7 +311,7 @@ app.on('request', async (req, res) => {
                 // 301代表重定向
                 // location跳转地址
                 res.writeHead(301, {
-                    'Location': '/list'
+                    'Location': '/'
                 });
                 res.end()
             })
