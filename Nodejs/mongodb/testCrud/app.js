@@ -16,7 +16,6 @@
 const http = require('http');
 const url = require('url');
 const querystring = require("querystring");
-const mongoose = require('mongoose');
 
 require('./user/model/model');
 const User = require('./user/model/user');

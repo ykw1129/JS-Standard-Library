@@ -16,6 +16,8 @@
         <span>{{$value.name}}</span>
         <span>{{$value.age}}</span>
         {{@ $value.content}}
+        <span>{{dateFormat($value.time,'yyyy-mm-dd')}}</span>
+        <!-- 使用dateFormat改变时间 -->
     </li>
     {{/each}}
 </ul>
