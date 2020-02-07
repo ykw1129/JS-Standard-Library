@@ -14,34 +14,12 @@
 
 // 当用户访问/delete时，实现用户删除功能
 const http = require('http');
-const url = require('url')
-const querystring = require("querystring")
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/playground', {
-        useUnifiedTopology: true,
-        useNewUrlParser: true
-    })
-    .then(() => console.log('数据库连接成功'))
-    .catch((err) => console.log(err + '数据库连接失败'))
+const url = require('url');
+const querystring = require("querystring");
+const mongoose = require('mongoose');
 
-// 创建用户集合规则
-const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        minlength: 2,
-        maxlength: 20
-    },
-    age: {
-        type: Number,
-        min: 18,
-        max: 80,
-    },
-    password: String,
-    email: String,
-    hobbies: [String]
-})
-const User = mongoose.model('User', userSchema)
+require('./user/model/model');
+const User = require('./user/model/user');
 // 创建服务器
 const app = http.createServer();
 
