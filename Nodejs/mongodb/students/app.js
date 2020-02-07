@@ -1,9 +1,12 @@
 const http = require('http')
 const url = require('url')
+const path = require('path')
 const getRouter = require('router')
-
+const template = require('art-template')
 const router = getRouter();
 
+// 配置模板根目录
+template.defaults.root = path.join(__dirname,'views')
 // 呈递学生档案信息页面
 router.get('/add',(req,res)=>{
     res.end('test')
