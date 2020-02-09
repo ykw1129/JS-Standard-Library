@@ -1,9 +1,11 @@
 const http = require('http')
 const path = require('path')
+const querystring = require('querystring')
 const getRouter = require('router')
 const template = require('art-template')
 const router = getRouter();
 const serveStatic = require('serve-static')
+const Student = require('./model/user');
 // 引入处理静态资源的第三方模块
 
 // 配置模板根目录
@@ -21,8 +23,19 @@ router.get('/list',(req,res)=>{
     let html = template('list',{})
     res.end(html)
 })
+router.post('/add',(req,res)=>{
+    // 接受post请求参数
+    let formData = '';
+    req.on('data',param=>{
+        formData += param;
+    })
+    req.on('end',()=>{
+        console.log(querystring.parse(formData))
+        res.end()
+    })
+})
 require('./model/connect');
-const Student = require('./model/user');
+
 
 const app = http.createServer();
 
@@ -34,5 +47,5 @@ app.on('request',(req,res)=>{
     // 处理静态资源
 })
 
-app.listen(80);
+app.listen(3000);
 console.log('服务器启动了')
