@@ -19,8 +19,11 @@ router.get('/add',(req,res)=>{
     res.end(html)
 })
 // 呈递学生档案信息档案列表页面
-router.get('/list',(req,res)=>{
-    let html = template('list',{})
+router.get('/list',async (req,res)=>{
+    let students = await Student.find();
+    let html = template('list',{
+        students
+    })
     res.end(html)
 })
 router.post('/add',(req,res)=>{
@@ -29,8 +32,11 @@ router.post('/add',(req,res)=>{
     req.on('data',param=>{
         formData += param;
     })
-    req.on('end',()=>{
-        console.log(querystring.parse(formData))
+    req.on('end',async ()=>{
+       await Student.create(querystring.parse(formData))
+       res.writeHead(301,{
+           Location: '/list'
+       })
         res.end()
     })
 })
