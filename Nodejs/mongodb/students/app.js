@@ -46,17 +46,33 @@ router.post('/add',(req,res)=>{
 })
 // 编辑页面
 router.get('/edit',async (req,res)=>{
-    const {pathname,query} = url.parse(req.url,true)
+    const {query} = url.parse(req.url,true)
     let students =  await Student.findOne({_id:query.id})
-    console.log(students)
     let sex = ['男','女','保密'];
     let hobbies = ['阅读','唱歌','跳舞'];
+    let collage = ['前端开发','JAVA','PHP','PYTHON'];
     let html = template('edit',{
         students,
         sex,
-        hobbies
+        hobbies,
+        collage
     })
     res.end(html)
+})
+router.post('/edit',(req,res)=>{
+    const {query} = url.parse(req.url,true)
+    let formData = ''
+    req.on('data',param=>{
+        formData+=param
+    })
+    req.on('end',async ()=>{
+       let student = querystring.parse(formData);
+       await Student.updateOne({_id:query.id},student)
+       res.writeHead(301,{
+        Location:'/list'
+       })
+       res.end()
+    })
 })
 require('./model/connect');
 

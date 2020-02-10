@@ -17,7 +17,7 @@
 
         <h1 style="text-align: center;">学生信息添加页面</h1>
 
-        <form action="/edit?id={{students._id}}" method="post">
+        <form action="/edit?id={{@students._id}}" method="post">
             <div class="form-group">
                 <label for="">姓名</label>
                 <input type="text" class="form-control" name="name" value="{{students.name}}">
@@ -43,24 +43,23 @@
             <div class="form-check">
                 {{each hobbies}}
               <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="hobbies" value="阅读" >
-                阅读
+                <input type="checkbox" class="form-check-input" name="hobbies" value="{{$value}}" {{hobbies.includes(students.hobbies[$index])?'checked':''}}>
+                {{$value}}
               </label>
                 {{/each}}
             </div>
 
             <select id="input" class="form-control" name="collage">
-                <option value="前端开发" selected>前端开发<option>
-                <option value="JAVA">JAVA</option>
-                <option value="PHP">PHP</option>
-                <option value="PYTHON">PYTHON</option>
+                {{each collage}}
+                <option value="{{$value}}" {{students.collage==$value?'checked':''}}>{{$value}}<option>
+                {{/each}}
             </select>
             <label>
                 入学日期:
-                <input type="date" name="enterDate" class="form-control">
+                <input type="date" name="enterDate" class="form-control" value="{{students.enterDate}}">
             </label>
                 
-            <button type="submit" class="btn btn-success">修改</button>
+            <button type="submit" class="btn btn-success">更新</button>
         </form>
     </div>
 
