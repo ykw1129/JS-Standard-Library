@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="device- initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学生信息添加页面</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 style="text-align: center;">学生信息添加页面</h1>
+
+        <form action="/edit?id={{students._id}}" method="post">
+            <div class="form-group">
+                <label for="">姓名</label>
+                <input type="text" class="form-control" name="name" value="{{students.name}}">
+            </div>
+            <div class="form-group">
+                <label for="">年龄</label>
+                <input type="number" class="form-control" name="age" value="{{students.age}}">
+            </div>
+            <div class="form-check">
+                <label for="">性别</label>
+                <br>
+                {{each sex}}
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="sex" value="{{$index}}" {{students.sex==$index?'checked':''}}>
+                    {{$value}}
+                </label>
+                {{/each}}
+            </div>
+            <div class="form-group">
+                <label for="">邮箱</label>
+                <input type="email" class="form-control" name="email" placeholder="请输入您的邮箱" value="{{students.email}}">
+            </div>
+            <div class="form-check">
+                {{each hobbies}}
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="hobbies" value="阅读" >
+                阅读
+              </label>
+                {{/each}}
+            </div>
+
+            <select id="input" class="form-control" name="collage">
+                <option value="前端开发" selected>前端开发<option>
+                <option value="JAVA">JAVA</option>
+                <option value="PHP">PHP</option>
+                <option value="PYTHON">PYTHON</option>
+            </select>
+            <label>
+                入学日期:
+                <input type="date" name="enterDate" class="form-control">
+            </label>
+                
+            <button type="submit" class="btn btn-success">修改</button>
+        </form>
+    </div>
+
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
