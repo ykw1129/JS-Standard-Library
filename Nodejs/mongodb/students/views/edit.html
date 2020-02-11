@@ -56,7 +56,7 @@
             </select>
             <label>
                 入学日期:
-                <input type="date" name="enterDate" class="form-control" value="{{students.enterDate}}">
+                <input type="date" name="enterDate" class="form-control" value="{{dateformat(students.enterDate,'yyyy-mm-dd')}}">
             </label>
                 
             <button type="submit" class="btn btn-success">更新</button>

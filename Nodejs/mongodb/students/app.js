@@ -59,6 +59,19 @@ router.get('/edit',async (req,res)=>{
     })
     res.end(html)
 })
+router.get('/remove',async (req,res)=>{
+    const {query} = url.parse(req.url,true)
+    await Student.findByIdAndDelete({_id:query.id}).then(()=>{
+        console.log("删除成功!")
+    }).catch((err)=>{
+        console.log("删除失败"+err)
+    })
+    console.log(query.id)
+    res.writeHead(301,{
+        Location:'/list'
+    })
+    res.end()
+})
 router.post('/edit',(req,res)=>{
     const {query} = url.parse(req.url,true)
     let formData = ''
@@ -74,6 +87,7 @@ router.post('/edit',(req,res)=>{
        res.end()
     })
 })
+
 require('./model/connect');
 
 

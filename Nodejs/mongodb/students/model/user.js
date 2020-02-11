@@ -9,7 +9,7 @@ const studentSchema = new mongoose.Schema({
     age:{
         type:Number,
         min:10,
-        max:25
+        max:100
     },
     sex:{
         type:String
