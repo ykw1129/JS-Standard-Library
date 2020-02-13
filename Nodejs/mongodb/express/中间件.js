@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const fs = require('fs')
 const port = 3000
 app.use('/index',(req,res,next)=>{
     // 当客户端访问/index的时候走当前中间件
@@ -30,8 +31,18 @@ app.use('/home',(req,res,next)=>{
 app.get('/err',(req,res)=>{
     throw new Error('此页面不存在');
 })
-
+app.get('/fs',(req,res,next)=>{
+    fs.readFile("/app.js",(err,data)=>{
+        if(err){
+            next(err)
+            // TODO:将错误信息通过参数形式传递给next() 即可触发错误处理中间件
+        }else{
+            res.end(data)
+        }
+    })
+})
 app.use((err,req,res,next)=>{
+    // 将错误传递给错误处理中间件
     // TODO:错误处理中间件  只能在同步代码执行下才能捕获错误  异步代码出错时无法捕获到的
     res.status(500).send(err.message);
 })
