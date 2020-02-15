@@ -1,1 +1,15 @@
-<h1>{{msg}}</h1>
+{{extend '../layout.html'}}
+{{block 'title'}}
+页面去哪了
+{{/block}}
+{{block 'main'}}
+<h1 style="text-align: center;">{{msg}}</h1>
+<h2 style="text-align: center;">三秒后回到登陆页面</h2>
+{{/block}}
+{{block 'js'}}
+<script>
+    setTimeout(function(){
+        location.href ='/admin/login'
+    },3000)
+</script>
+{{/block}}

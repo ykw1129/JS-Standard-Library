@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{block 'title'}}我的博客{{/block}}</title>
+    {{include './common/css.html'}}
+</head>
+<body>
+    {{block 'main'}}
+        <h1>您是不是走丢了呢？</h1>
+    {{/block}}
+    {{include './common/js.html'}}
+    {{block 'js'}}
+        
+    {{/block}}
+</body>
+</html>
