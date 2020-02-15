@@ -8,6 +8,7 @@ require('./model/connect');
 require('./model/user')
 const home = require('./router/home')
 const admin = require('./router/admin')
+app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,'public')))
 // 拦截请求
 // 告诉express框架模板所在的位置

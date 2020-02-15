@@ -50,10 +50,12 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
             var result = serializeToJson($(this))
             if(result.email.trim().length == 0){
                 // 如果用户没有输入邮件地址的话 阻止程序向下执行
+                alert('请输入邮箱地址')
                 return false
             }
             if(result.password.trim().length == 0){
-                // 如果用户没有输入密码的话 阻止程序向下执行    
+                // 如果用户没有输入密码的话 阻止程序向下执行
+                alert('请输入密码')
                 return false
             }
         })
