@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 // 引用express框架
 const bodyParser = require('body-parser')
+const session = require('express-session')
 const app = express()
 // 创建网站服务器
 require('./model/connect');
@@ -9,6 +10,8 @@ require('./model/user')
 const home = require('./router/home')
 const admin = require('./router/admin')
 app.use(bodyParser.urlencoded({extended:false}))
+// 配置session
+app.use(session({secret:'secret key'}))
 app.use(express.static(path.join(__dirname,'public')))
 // 拦截请求
 // 告诉express框架模板所在的位置
@@ -19,7 +22,7 @@ app.set('view engine','html');
 app.engine('html',require('express-art-template'))
 
 
-
+app.use('/admin',require('./middleware/loginGuard'))
 
 app.use('/home',home)
 app.use('/admin',admin)

@@ -1,6 +1,7 @@
 // 创建用户集合
 // 引入mongoose第三模块
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
     username:{
@@ -36,7 +37,17 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User',userSchema)
 // 将用户集合作为模块成员进行导出
-
+async function createUser(){
+   const salt = await bcrypt.genSalt(10)
+   const pass = await bcrypt.hash('123456',salt)
+   const user = await User.create({
+    username:'admin123',
+    email:'admin@123.com',
+    password:pass,
+    role:'admin',
+    status:0
+   })
+}
 /* User.create({
     username:'admin123',
     email:'admin@123.com',

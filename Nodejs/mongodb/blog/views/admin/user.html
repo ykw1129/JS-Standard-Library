@@ -1,0 +1,10 @@
+{{extend '../layout.html'}}
+{{block 'title'}}
+    博客主页
+{{/block}}
+{{block 'main'}}
+    <h2 style="text-align: center;">{{userInfo.username?userInfo.username:'用户名不存在'}}</h2>
+{{/block}}
+{{block 'js'}}
+
+{{/block}}
