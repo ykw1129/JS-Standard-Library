@@ -6,6 +6,12 @@
 <div class="container">
 
     <h1 style="text-align: center;">个人信息修改</h1>
+    {{if(message)}}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>警告信息</strong>&nbsp;&nbsp;{{message}}
+    </div>
+    {{/if}}
     <form action="/admin/user-edit" method="post">
         <div class="form-group">
             <label for="">姓名</label>
