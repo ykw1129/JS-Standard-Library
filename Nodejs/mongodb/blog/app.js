@@ -27,4 +27,8 @@ app.use('/admin',require('./middleware/loginGuard'))
 app.use('/home',home)
 app.use('/admin',admin)
 app.get('/', (req, res) => res.send('Hello World!'))
+app.use((err,req,res,next)=>{
+    const e = JSON.parse(err)
+    res.redirect(`${e.path}?message=${e.message}`)
+})
 app.listen(3000, () => console.log(`博客服务器已在运行`))

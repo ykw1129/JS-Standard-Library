@@ -2,7 +2,7 @@
 // 引入mongoose第三模块
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
-
+const Joi = require('joi')
 const userSchema = new mongoose.Schema({
     username:{
         type:String,
@@ -48,6 +48,21 @@ async function createUser(){
     status:0
    })
 }
+
+
+const validateUser = user =>{
+        // 定义对象的验证规则
+        const schema = {
+            username:Joi.string().min(2).max(12).required().error(new Error('用户名不符合验证规则')),
+            email:Joi.string().email().required().error(new Error('邮箱格式不符合要求')),
+            password:Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required().error(new Error('密码格式不符合要求')),
+            role:Joi.string().valid('normal','admin').required().error(new Error('角色值非法')),
+            state:Joi.number().valid(0,1).required().error(new Error('状态值非法'))
+    
+        };
+         return Joi.validate(req.body,schema);
+        // 实施验证
+}
 /* User.create({
     username:'admin123',
     email:'admin@123.com',
@@ -60,4 +75,4 @@ async function createUser(){
     console.log('用户创建失败')
 }) */
 
-module.exports = {User}
+module.exports = {User,validateUser}
