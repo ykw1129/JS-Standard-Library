@@ -12,36 +12,39 @@
         <strong>警告信息</strong>&nbsp;&nbsp;{{message}}
     </div>
     {{/if}}
-    <form action="/admin/user-edit" method="post">
+    {{if(user)}}
+    <h2 style="text-align: center;">id:&nbsp;{{user&&user.id}}</h2>
+    {{/if}}
+    <form action="{{link}}" method="post">
         <div class="form-group">
-            <label for="">姓名</label>
-            <input type="text" class="form-control" name="username">
+            <label for="">用户名</label>
+            <input type="text" class="form-control" name="username" value="{{user&&user.username}}">
         </div>
         <div class="form-group">
             <label for="">邮箱</label>
-            <input type="email" class="form-control" name="email" >
+            <input type="email" class="form-control" name="email" value="{{user&&user.email}}">
         </div>
         <div class="form-group">
             <label for="">密码</label>
-            <input type="password" class="form-control" name="password" placeholder="请输入您的密码">
+            <input type="password" class="form-control" name="password" placeholder="请输入您的密码" value="{{user&&user.password}}">
         </div>
         <div class="form-group">
             <label for="">角色</label>
             <select name="role" class="form-control">
-                <option value="normal">普通用户</option>
-                <option value="admin">超级管理员</option>
+                <option value="normal" {{user&&user.role=='normal'?'selected':''}}>普通用户</option>
+                <option value="admin" {{user&&user.role=='admin'?'selected':''}}>超级管理员</option>
             </select>            
         </div>
         <div class="form-group">
           <label for="">状态</label>
           <div class="form-group">
             <select class="form-control" name="status" >
-              <option value="0">启用</option>
-              <option value="1">禁用</option>
+              <option value="0" {{user&&user.status=='0'?'selected':''}}>启用</option>
+              <option value="1" {{user&&user.status=='1'?'selected':''}}>禁用</option>
             </select>
           </div>
         </div>
-        <button type="submit" class="btn btn-success">添加</button>
+        <button type="submit" class="btn btn-success">{{button}}</button>
     </form>
 </div>
 {{/block}}

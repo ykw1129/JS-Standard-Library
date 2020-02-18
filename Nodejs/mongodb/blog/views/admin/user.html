@@ -21,10 +21,10 @@
                 <td>{{$value.username}}</td>
                 <td>{{$value.email}}</td>
                 <td>{{$value.role}}</td>
-                <td>{{$value.status}}</td>
+                <td>{{$value.status==0?'启用':'禁用'}}</td>
                 <td>
                     <span>
-                        <a  class="btn btn-success" href="#" role="button">编辑</a>
+                        <a  class="btn btn-success" href="/admin/user-edit?id={{$value.id}}" role="button">编辑</a>
                         <a  class="btn btn-danger" href="#" role="button">删除</a>
                     </span>
                 </td>
