@@ -60,7 +60,7 @@ const validateUser = user =>{
             state:Joi.number().valid(0,1).required().error(new Error('状态值非法'))
     
         };
-         return Joi.validate(req.body,schema);
+         return Joi.validate(user,schema);
         // 实施验证
 }
 /* User.create({
