@@ -25,7 +25,10 @@
                 <td>
                     <span>
                         <a  class="btn btn-success" href="/admin/user-edit?id={{$value.id}}" role="button">编辑</a>
-                        <a  class="btn btn-danger" href="#" role="button">删除</a>
+                        <!-- <a  class="btn btn-danger" href="#" role="button">删除</a> -->
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModel" data-id="{{$value.id}}">
+                          删除
+                        </button>
                     </span>
                 </td>
             </tr>
@@ -60,9 +63,32 @@
               {{/if}}
           </li>
         </ul>
-      </nav>
+      </nav>      
+      <!-- Modal -->
+      <div class="modal fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title">请确认</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <p>您确定要删除这个用户吗</p>
+              <input type="hidden" name="id">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-primary">确定</button>
+            </div>
+          </div>
+        </div>
+      </div>
     
 {{/block}}
 {{block 'js'}}
-
+<script>
+  
+</script>
 {{/block}}

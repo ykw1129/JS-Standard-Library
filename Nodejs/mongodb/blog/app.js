@@ -11,7 +11,19 @@ const home = require('./router/home')
 const admin = require('./router/admin')
 app.use(bodyParser.urlencoded({extended:false}))
 // 配置session
-app.use(session({secret:'secret key'}))
+app.use(session({
+    resave: false,
+    /* 并发请求会导致的session不一致，
+    因为设置了resave选项为true后（默认为true），
+    默认在你每次调用res.send方法发送响应的时候会
+    执行一次req.session.save，
+    所以不管这两个请求修没修改session，
+    最后默认存储session的store里的值会是
+    最后执行res.send方法也就是
+    响应最慢的那个请求中session最后的值。 */
+    saveUninitialized: true,
+    secret:'secret key'
+}))
 app.use(express.static(path.join(__dirname,'public')))
 // 拦截请求
 // 告诉express框架模板所在的位置
@@ -29,6 +41,15 @@ app.use('/admin',admin)
 app.get('/', (req, res) => res.send('Hello World!'))
 app.use((err,req,res,next)=>{
     const e = JSON.parse(err)
-    res.redirect(`${e.path}?message=${e.message}`)
+
+    let params = []
+    for(let attr in e){
+        if(attr!='path'){
+           params.push(attr+ '=' +e[attr])
+        }
+    }
+    // params  ['密码比对失败,不能进行用户资料的修改','id的值'] 
+    // join可以在这两中间加个&
+    res.redirect(`${e.path}?${params.join('&')}`)
 })
 app.listen(3000, () => console.log(`博客服务器已在运行`))

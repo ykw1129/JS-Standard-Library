@@ -1,6 +1,6 @@
 const express = require('express')
 const admin = express.Router()
-
+admin.get('/',require('../router/admin/loginPage'))
 admin.get('/login',require('../router/admin/loginPage'))
 // 渲染登陆页面
 admin.post('/login',require('./admin/login'))
