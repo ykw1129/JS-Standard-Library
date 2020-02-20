@@ -17,4 +17,8 @@ admin.post('/user-modify',require('../router/admin/user-modify'))
 
 admin.get('/delete',require('../router/admin/delete'))
 
+// 文章列表页面路由
+admin.get('/article',require('../router/admin/article'))
+// 文章编辑页面路由
+admin.get('/article-edit',require('../router/admin/article-edit'))
 module.exports = admin
