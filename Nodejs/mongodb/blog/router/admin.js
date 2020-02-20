@@ -14,4 +14,7 @@ admin.get('/user-edit',require('../router/admin/user-edit'))
 admin.post('/user-edit',require('../router/admin/user-edit-fn'))
 
 admin.post('/user-modify',require('../router/admin/user-modify'))
+
+admin.get('/delete',require('../router/admin/delete'))
+
 module.exports = admin

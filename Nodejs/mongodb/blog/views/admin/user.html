@@ -26,7 +26,7 @@
                     <span>
                         <a  class="btn btn-success" href="/admin/user-edit?id={{$value.id}}" role="button">编辑</a>
                         <!-- <a  class="btn btn-danger" href="#" role="button">删除</a> -->
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModel" data-id="{{$value.id}}">
+                        <button type="button" class="delete btn btn-danger" data-toggle="modal" data-target="#deleteModel" data-id="{{$value.id}}">
                           删除
                         </button>
                     </span>
@@ -67,6 +67,7 @@
       <!-- Modal -->
       <div class="modal fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
+          <form action="/admin/delete" method="get">
           <div class="modal-content">
             <div class="modal-header">
               <h3 class="modal-title">请确认</h3>
@@ -76,19 +77,25 @@
             </div>
             <div class="modal-body">
               <p>您确定要删除这个用户吗</p>
-              <input type="hidden" name="id">
+              <input type="hidden" name="id" id="delteUserId">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-primary">确定</button>
+              <button type="submit" class="btn btn-primary">确定</button>
             </div>
           </div>
+        </form>
         </div>
       </div>
     
 {{/block}}
 {{block 'js'}}
 <script>
-  
+    $('.delete').on('click',function(){
+      const id = $(this).attr('data-id')
+      // 获取到user 的id
+      $("#delteUserId").val(id)
+      // 将获取的用户id放在隐藏域中
+    })
 </script>
 {{/block}}
