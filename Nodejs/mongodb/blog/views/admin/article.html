@@ -1,15 +1,15 @@
 {{extend '../layout.html'}}
 {{block 'title'}}
-    博客主页
+    博客文章主页
 {{/block}}
 {{block 'aside'}}
 <aside>
-    <ul>
-        <li><a class="btn btn-success" href="/admin/user">
+    <ul> 
+        <li><a class="btn btn-success {{currentLink == 'user' ? 'active':''}}" href="/admin/user">
             <span class="glyphicon glyphicon-user"></span>
             用户管理
         </a></li>
-        <li><a class="btn btn-primary" href="/admin/article">
+        <li><a class="btn btn-primary {{currentLink == 'article' ? 'active':''}}" href="/admin/article">
             <span class="glyphicon glyphicon-user"></span>
             文章管理
         </a></li>
@@ -18,7 +18,7 @@
 {{/block}}
 {{block 'main'}}
     <h2 style="text-align: center;">{{userInfo.username?userInfo.username:'用户名不存在'}}</h2>
-    <a href="/admin/user-edit" class="btn btn-large btn-block btn-success">发布新文章</a>
+    <a href="/admin/article-edit" class="btn btn-large btn-block btn-success">发布新文章</a>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -53,7 +53,4 @@
     
 {{/block}}
 {{block 'js'}}
-<script>
-
-</script>
 {{/block}}

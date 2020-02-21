@@ -21,4 +21,7 @@ admin.get('/delete',require('../router/admin/delete'))
 admin.get('/article',require('../router/admin/article'))
 // 文章编辑页面路由
 admin.get('/article-edit',require('../router/admin/article-edit'))
+
+// 实现文章添加功能的路由
+admin.post('/article-add',require('../router/admin/artcle-add'))
 module.exports = admin
