@@ -2,6 +2,8 @@
 // glup.dest() 输出文件
 // glup.task() 建立gulp任务
 // gulp.watch() 监控文件的变化
+// gulp.series：按照顺序执行
+// gulp.paralle：可以并行计算
 const gulp = require('gulp')
 const htmlmin = require('gulp-htmlmin')
 const cssmin = require('gulp-cssmin')
@@ -39,4 +41,6 @@ gulp.task('copy', () => {
 })
 
 // 构建任务
-gulp.task('default',['cssmin'])
+gulp.task('default',gulp.series('cssmin','copy'))
+// npm install 下载开发依赖
+// npm install --production 下载生产环境依赖
