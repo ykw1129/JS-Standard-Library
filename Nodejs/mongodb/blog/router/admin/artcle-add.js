@@ -10,6 +10,5 @@ module.exports = (req,res) =>{
     // 3、保留上传文件的后缀
     form.keepExtensions = false
     // 4、解析表单
-    form
     res.send('ok')
 }
