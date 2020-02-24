@@ -4,6 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const dateFormate = require('dateformat')
+const morgan = require('morgan')
 const template = require('art-template')
 const app = express()
 // 创建网站服务器
@@ -27,6 +28,18 @@ app.use(session({
     secret:'secret key'
 }))
 app.use(express.static(path.join(__dirname,'public')))
+
+// 获取系统环境变量 返回值是对象
+// process.env
+if(process.env.NODE_ENV == 'development'){
+    // 当前是开发环境
+    console.log("当前是开发环境")
+    // 在开发环境中 将客户端 发送到服务器端的请求信息打印到控制台中
+    app.use(morgan('dev'))
+}else{
+    // 当前是生产环境
+    console.log("当前是生产环境")
+}
 // 拦截请求
 // 告诉express框架模板所在的位置
 app.set('views',path.join(__dirname,'views'))
