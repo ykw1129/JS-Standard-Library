@@ -3,6 +3,7 @@
     博客文章主页
 {{/block}}
 {{block 'aside'}}
+{{include '../common/nav.html'}}
 <aside>
     <ul> 
         <li><a class="btn btn-success {{currentLink == 'user' ? 'active':''}}" href="/admin/user">

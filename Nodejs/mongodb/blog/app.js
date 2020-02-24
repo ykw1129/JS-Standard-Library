@@ -3,8 +3,13 @@ const express = require('express')
 // 引用express框架
 const bodyParser = require('body-parser')
 const session = require('express-session')
+// session
 const dateFormate = require('dateformat')
+// 日期格式化
 const morgan = require('morgan')
+// 读取 请求方式 请求地址的信息
+const config = require('config')
+// 读取配置文件中的的配置信息
 const template = require('art-template')
 const app = express()
 // 创建网站服务器
@@ -28,6 +33,9 @@ app.use(session({
     secret:'secret key'
 }))
 app.use(express.static(path.join(__dirname,'public')))
+
+console.log(config.get('title'))
+
 
 // 获取系统环境变量 返回值是对象
 // process.env
@@ -53,7 +61,6 @@ app.use('/admin',require('./middleware/loginGuard'))
 
 app.use('/home',home)
 app.use('/admin',admin)
-app.get('/', (req, res) => res.send('Hello World!'))
 app.use((err,req,res,next)=>{
     const e = JSON.parse(err)
 
