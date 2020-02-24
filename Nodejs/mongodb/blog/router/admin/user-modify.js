@@ -1,5 +1,5 @@
 const {User} = require('../../model/user')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 module.exports = async (req,res,next) =>{
     const {username,email,role,status,password} = req.body
     // 接收客户端传递过来的请求参数

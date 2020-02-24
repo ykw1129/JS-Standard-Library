@@ -23,5 +23,5 @@ admin.get('/article',require('../router/admin/article'))
 admin.get('/article-edit',require('../router/admin/article-edit'))
 
 // 实现文章添加功能的路由
-admin.post('/article-add',require('../router/admin/artcle-add'))
+admin.post('/article-add',require('../router/admin/article-add'))
 module.exports = admin

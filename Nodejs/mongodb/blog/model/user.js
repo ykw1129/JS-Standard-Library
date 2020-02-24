@@ -1,7 +1,7 @@
 // 创建用户集合
 // 引入mongoose第三模块
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const Joi = require('joi')
 const userSchema = new mongoose.Schema({
     username:{

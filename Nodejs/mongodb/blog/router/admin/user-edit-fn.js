@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const {User,validateUser} = require('../../model/user')
 module.exports = async (req,res,next)=>{
 

@@ -27,7 +27,7 @@ const artcleSchema = new mongoose.Schema({
     }
 })
 // 3、根据规则创建集合
-const Article = mongoose.model('Article')
+const Article = mongoose.model('Article',artcleSchema)
 
 // 4、将集合规则作为模块成员进行导出
 module.exports = {

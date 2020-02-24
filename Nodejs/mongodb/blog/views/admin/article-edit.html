@@ -15,7 +15,7 @@
     {{if(user)}}
     <h2 style="text-align: center;">id:&nbsp;{{user&&user.id}}</h2>
     {{/if}}
-    <form  action="/admin/article-add" method="post">
+    <form  action="/admin/article-add" method="post" enctype="multipart/form-data">
         <!-- 
             enctype 指定表单数据的编码类型
                 application/x-www-form-urlencoded
@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
             <label for="">作者</label>
-            <input type="text" class="form-control" readonly name="author">
+            <input type="text" class="form-control" readonly name="author" value="{{@userInfo._id}}">
         </div>
         <div class="form-group">
             <label for="">发布时间</label>
@@ -37,9 +37,10 @@
         </div>
         <div class="form-group">
             <label for="exampleInputFile">文章封面</label>
-            <input type="file" class="form-eontrol" name="cover" >
+            <input type="file" class="form-eontrol" name="cover" id="file" multiple>
+            <!-- multiple 允许用户一次性选择多个文件 -->
             <div class="thumbnail-waper">
-                <img class="img-thumbnail" src="" alt="">
+                <img class="img-thumbnail" src="" alt="" id="preview">
             </div>
         </div>
         <div class="form-group">
@@ -51,5 +52,24 @@
 </div>
 {{/block}}
 {{block 'js'}}
-
+<script>
+    // 选择上传控件
+     var file = document.querySelector('#file')
+     var preview = document.querySelector('#preview')
+     
+     file.onchange = function(){
+        // 1、创建文件读取对象
+        var reader = new FileReader()
+            // console.log(this.files[0])
+        //用户选择的文件列表
+            // 2、读取对象
+            reader.readAsDataURL(this.files[0]);
+            // 3、监听
+            reader.onload = function(){
+                console.log(reader.result)
+                // 将文件读取的结果显示在页面中
+                preview.src = reader.result
+            }
+     }
+</script>
 {{/block}}

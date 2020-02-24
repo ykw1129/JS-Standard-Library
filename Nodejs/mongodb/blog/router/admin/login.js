@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 // 导入用户集合构造函数
 const {User} = require('../../model/user')
 module.exports = async (req,res)=>{

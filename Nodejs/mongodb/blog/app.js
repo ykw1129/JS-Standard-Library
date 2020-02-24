@@ -3,6 +3,8 @@ const express = require('express')
 // 引用express框架
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const dateFormate = require('dateformat')
+const template = require('art-template')
 const app = express()
 // 创建网站服务器
 require('./model/connect');
@@ -32,8 +34,8 @@ app.set('views',path.join(__dirname,'views'))
 app.set('view engine','html');
 // TODO:当渲染后缀为art的模板时 所用的模板引擎是什么
 app.engine('html',require('express-art-template'))
-
-
+// 向模板内部导入dateFormate变量
+template.defaults.imports.dateFormate = dateFormate
 app.use('/admin',require('./middleware/loginGuard'))
 
 app.use('/home',home)

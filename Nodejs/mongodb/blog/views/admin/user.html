@@ -18,6 +18,7 @@
 {{/block}}
 {{block 'main'}}
     <h2 style="text-align: center;">{{userInfo.username?userInfo.username:'用户名不存在'}}</h2>
+    <a href="/admin/loginout" class="btn btn-large btn-block btn-warning">退出登录</a>
     <a href="/admin/user-edit" class="btn btn-large btn-block btn-success">添加用户</a>
     <table class="table table-hover">
         <thead>
