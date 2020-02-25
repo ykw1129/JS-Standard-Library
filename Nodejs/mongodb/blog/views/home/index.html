@@ -11,12 +11,29 @@
             <img src="{{$value.cover}}" alt="{{$value.title}}">
             <span>{{$value.author.username}}</span>|<span>{{dateFormate($value.publishDate,'yyyy-mm-dd')}}</span>
             <section>
-                {{$value.content}}
+                {{$value.content.replace(/<[^>]+>/g,).substr(0,150) +'...'}}
+                <!-- 忽略掉 html标签 -->
             </section>
         </a>
         </li>
         {{/each}}
     </ul>
+    <div id="page">
+        {{if(articles.page == 1)}}
+        <a class="disabled" href="javascript:;">上一页</a>
+        {{else}}
+        <a href="/home?page={{articles.page-1}}">上一页</a>
+        {{/if}}
+        {{each articles.display}}
+        <a href="/home?page={{$value}}">{{$value}}</a>
+        {{/each}}
+
+        {{if(articles.page == display)}}
+        <a class="disabled" href="javascript:;">下一页</a>
+        {{else}}
+        <a href="/home?page={{articles.page+1}}">下一页</a>
+        {{/if}}
+    </div>
 </div>
 {{/block}}
 {{block 'js'}}

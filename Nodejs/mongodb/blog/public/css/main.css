@@ -39,3 +39,6 @@ span:nth-child(2){
     /* 从第三个开始  */
     margin-top: 100px;
 }
+#page{
+    text-align: center;
+}

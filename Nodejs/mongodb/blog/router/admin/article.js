@@ -5,7 +5,7 @@ module.exports = async (req,res)=>{
     const size = 3
     const {page} = req.query
     let tetol = await Article.find()
-    const display = tetol/size
+    const display = tetol.length/size
     // 标识 标识当前访问的是用户管理页面
     req.app.locals.currentLink = 'article'
     let articles = await pagination(Article).find().page(page).size(size).display(display).populate('author').exec()
