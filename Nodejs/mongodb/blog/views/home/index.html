@@ -7,7 +7,7 @@
 <div class="container">
     <ul id="home">
         {{each articles.records}}
-        <li><a href="">
+        <li><a href="/home/article?id={{$value.id}}">
             <img src="{{$value.cover}}" alt="{{$value.title}}">
             <span>{{$value.author.username}}</span>|<span>{{dateFormate($value.publishDate,'yyyy-mm-dd')}}</span>
             <section>

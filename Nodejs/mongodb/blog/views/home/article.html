@@ -4,9 +4,12 @@
 {{/block}}
 {{block 'main'}}
 {{include '../common/nav.html'}}
-
-
-
+<h1>{{article.title}}</h1>
+<span>{{article.author.username}}</span>|<span>dateFormate(article.publishDate,'yyyy-mm-dd')</span>
+<img src="{{article.cover}}" alt="{{article.title}}">
+<div>
+    {{article.content}}
+</div>
 {{/block}}
 {{block 'js'}}
 
