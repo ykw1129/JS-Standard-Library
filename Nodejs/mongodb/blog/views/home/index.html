@@ -4,8 +4,20 @@
 {{/block}}
 {{block 'main'}}
 {{include '../common/nav.html'}}
-
-
+<div class="container">
+    <ul id="home">
+        {{each articles.records}}
+        <li><a href="">
+            <img src="{{$value.cover}}" alt="{{$value.title}}">
+            <span>{{$value.author.username}}</span>|<span>{{dateFormate($value.publishDate,'yyyy-mm-dd')}}</span>
+            <section>
+                {{$value.content}}
+            </section>
+        </a>
+        </li>
+        {{/each}}
+    </ul>
+</div>
 {{/block}}
 {{block 'js'}}
 
