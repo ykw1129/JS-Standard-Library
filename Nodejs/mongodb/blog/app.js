@@ -29,8 +29,13 @@ app.use(session({
     最后默认存储session的store里的值会是
     最后执行res.send方法也就是
     响应最慢的那个请求中session最后的值。 */
-    saveUninitialized: true,
-    secret:'secret key'
+    saveUninitialized: false,
+    //false 用户没登陆的时候 不要给我保持cookie
+    secret:'secret key',
+    cookie:{
+        maxAge:24*60*60*1000
+        // cookie过期时间
+    }
 }))
 app.use(express.static(path.join(__dirname,'public')))
 
