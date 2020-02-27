@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p> 用户名
+        <input type="text"  id="username">
+    </p>
+    <p>
+        年龄
+        <input type="text"  id="age">
+    </p>
+    <p>
+        <input type="button" value="提交" id="btn">
+    </p>
+    <script>
+        var btn = document.getElementById('btn')
+        var username = document.getElementById('username')
+        var age = document.getElementById('age')
+        btn.onclick = function(){
+            var xhr = new XMLHttpRequest()
+            var nameValue = username.value;
+            var ageValue = age.value;
+            var params = 'username='+nameValue+'&age='+ageValue
+            // 如果是如上的格式那么 post设置的参数头就是application/x-www-form-urlencoded
+            xhr.open('post','http://localhost:3000/post')
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+            // post请求参数 必须设置 Content-Type
+            xhr.send(params)
+            xhr.onload = function(){
+                console.log(xhr.responseText)
+            }
+        }
+    </script>
+</body>
+</html>
