@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">发送ajax请求</button>
+    <script>
+        var btn = document.getElementById('btn')
+
+        btn.onclick = function(){
+            var xhr = new XMLHttpRequest()
+        // xhr.readyState
+        // 0已经创建了ajax对象 但是还没有对ajax对象进行配置
+        xhr.open('get','http://localhost:3000/error')
+        // 1、已经对ajax对象进行配置 但是还没发送请求
+        // 当ajax状态码发生变化的时候触发
+        xhr.onreadystatechange = function(){
+            // 2、请求已经发送了
+            // 3、以及接收到服务器端的部分数据了
+            // 4、服务端的响应数据已经接受完成
+            if(xhr.readyState == 4){
+                console.log(xhr.responseText)
+            }
+            // 1、网路畅通 服务器端没有接受到请求 返回404状态码
+            // 2、网络畅通 服务器端能接收到请求 返回500
+            // 3、网络中断 请求无法发送到服务器端（会触发xhr对象下面的onerror事件）
+            xhr.onerror = function(){
+                alert("网络中断！")
+            }
+        }
+        xhr.send();
+        }
+    </script>
+</body>
+</html>

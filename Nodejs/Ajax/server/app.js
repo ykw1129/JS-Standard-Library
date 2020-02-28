@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
+const fs = require('fs')
 const app = express()
 const port = 3000
 
@@ -25,6 +26,18 @@ app.post('/post',(req,res)=>{
 app.post('/json',(req,res)=>{
     // get请求是不能提交json对象格式的，传统网站的表单提交也是不支持json对象格式的
     res.send(req.body)
+})
+app.get('/readystate',(req,res)=>{
+    res.send('hello')
+})
+
+app.get('/error',(req,res)=>{
+    res.status(400).send('not ok')
+})
+app.get('/cache',(req,res)=>{
+    fs.readFile('./text.txt',(err,result)=>{
+        res.send(result)
+    })
 })
 
 app.listen(port, () => console.log(`服务器启动了`))

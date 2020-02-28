@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function ajax({type,url,data,success}){
+            // 创建ajax对象
+           var xhr =  new XMLHttpRequest()
+            //配置ajax对象
+            // 拼接请求参数的变量
+            var params = ''
+            for(var attr in data){
+                params+=attr+'='+data[attr]+'&'
+                // 循环对象应该用for in
+            }
+            params = params.substr(0,params.length - 1)
+            // 将参数最后面的&截取掉
+            // 将截取的结果重新赋值给params
+            
+            // 判断请求方式
+            if(type =='get'){
+                url = url +'?'+params
+            }
+            xhr.open(type,url)
+            // 发送请求
+            if(type = 'post'){
+                // 设置请求参数格式的类型
+                xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+                xhr.send(params)
+            }else{
+                xhr.send()
+            }
+            
+            // 监听xhr对象下面的onload事件
+            // 当xhr对象接收完响应数据后触发
+            xhr.onload = function(){
+                success(xhr.responseText)
+            }
+        }
+        ajax({
+            type:'post',
+            url:'http://localhost:3000/first',
+            data:{
+                name:'zhangsan',
+                age:20
+            },
+            success:function(data){
+                console.log(data)
+            }
+        })
+        /* 
+        请求参数要考虑的问题
+            1、请求参数位置的问题
+                将请求参数传递到ajax函数内部，在函数内部根据请求方式的不同
+                将请求参数放置在不同的位置
+                get 放在请求地址的后面
+                post 放在send方法中
+            2、请求参数格式的问题
+                application/x-www-form-urlencoded
+                    name=参数&age=参数
+                application/json
+                    {"name":"","age":""}
+                1、传递对象数据类型对于函数的调用者更加友好
+                2、在函数内部对象数据类型转换为字符串数据类型更加方便
+
+
+         */
+    </script>
+</body>
+</html>
