@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .bg-danger{
+        color: chocolate;
+    }
+    .bg-success{
+        color: darkseagreen;
+    }
+</style>
+<body>
+    邮箱地址
+    <input type="email" name="" id="email">
+    <p id="info"></p>
+    <script src="./js/ajax.js"></script>
+    <script>
+        // 获取页面中的元素
+        var email = document.getElementById("email")
+        var info = document.getElementById("info")
+
+        // 当文本框离开焦点以后
+        email.onblur = function(){
+            var email = this.value
+
+            var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+            //如果用户输入的邮箱地址符合规则
+            if(!reg.test(email)){
+                info.innerHTML = '请输入符合规则的邮箱地址'
+                info.className = 'bg-danger'
+                //阻止程序向下执行
+                return;
+            }else{
+                ajax({
+                    type:'get',
+                    url:'http://localhost:3000/verifyEmailAdress',
+                    data:{
+                        email:email
+                    },
+                    success:function(result){
+                        result = JSON.parse(result)
+                        info.innerHTML=result.message
+                        info.className = 'bg-success'
+                    },
+                    error:function(err){
+                        err = JSON.parse(err)
+                        alert(err.message)
+                    }
+                })
+            }
+        }
+    </script>
+</body>
+
+</html>

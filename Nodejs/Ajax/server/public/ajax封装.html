@@ -24,8 +24,8 @@
             //配置ajax对象
             // 拼接请求参数的变量
             var params = ''
-            for(var attr in data){
-                params+=attr+'='+data[attr]+'&'
+            for(var attr in defaults.data){
+                params+=attr+'='+defaults.data[attr]+'&'
                 // 循环对象应该用for in
             }
             params = params.substr(0,params.length - 1)
