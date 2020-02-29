@@ -7,8 +7,19 @@
 </head>
 <body>
     <script>
-        function ajax({type,url,data,success}){
+        function ajax(defaults){
             // 创建ajax对象
+            var defaults = {
+                type:'get',
+                url:'',
+                data:{},
+                header:{
+                    'Content-Type':'application/x-www-form-urlencoded'
+                },
+                success:function(){},
+                error:function(){}
+
+            }
            var xhr =  new XMLHttpRequest()
             //配置ajax对象
             // 拼接请求参数的变量
@@ -22,15 +33,22 @@
             // 将截取的结果重新赋值给params
             
             // 判断请求方式
-            if(type =='get'){
+            if(defaults.type =='get'){
                 url = url +'?'+params
             }
-            xhr.open(type,url)
+            xhr.open(defaults.type,defaults.url)
             // 发送请求
-            if(type = 'post'){
+            if(defaults.type = 'post'){
+                // 用户希望的向服务端传递的请求参数的类型
+                var contentType = defaults.header['Content-Type']
                 // 设置请求参数格式的类型
-                xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
-                xhr.send(params)
+                xhr.setRequestHeader('Content-Type',contentType)
+                if(contentType =='application/json'){
+                    xhr.send(JSON.stringify(defaults.data))
+                }
+                else{
+                    xhr.send(params)
+                }
             }else{
                 xhr.send()
             }
@@ -38,18 +56,28 @@
             // 监听xhr对象下面的onload事件
             // 当xhr对象接收完响应数据后触发
             xhr.onload = function(){
-                success(xhr.responseText)
+                if(xhr.status == 200){
+                    defaults.success(xhr.responseText,xhr)
+                }else{
+                    defaults.error(xhr.responseText,xhr)
+                }
             }
         }
         ajax({
             type:'post',
             url:'http://localhost:3000/first',
+            header:{
+                'Content-Type':'application/x-www-form-urlencoded'
+            },
             data:{
                 name:'zhangsan',
                 age:20
             },
             success:function(data){
                 console.log(data)
+            },
+            error:function(){
+
             }
         })
         /* 
