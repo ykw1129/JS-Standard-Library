@@ -22,4 +22,18 @@ app.post('/formData',(req,res)=>{
     })
 })
 
+app.post('/upload',(req,res)=>{
+    const form = new formidable.IncomingForm()
+    form.uploadDir = path.join(__dirname,'public','uploads')
+    // 设置客户端上传文件的存储路径
+    form.keepExtensions = true
+    // 保留上传文件的后缀名
+    form.parse(req,(err,fields,files)=>{
+        // files.attrName.path 是图片存储绝对路径路径
+        res.send({
+            path:files.attrName.path.split('public')[1]
+        })
+    })
+})
+
 app.listen(port, () => console.log(`服务器启动了`))
