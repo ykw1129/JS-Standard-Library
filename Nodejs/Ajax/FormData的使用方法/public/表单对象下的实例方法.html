@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 创建普通的html表单 -->
+    <form id="form">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="button" id="btn" value="提交">
+    </form>
+    <script>
+    // 获取按钮
+        var btn = document.getElementById('btn')
+        // 获取表单
+        var form = document.getElementById('form')
+        
+        btn.onclick = function(){
+            // 将普通的html表单转化为表单对象
+            var formData = new FormData(form)
+
+            /* 
+                get('key') 获取表单对象属性的值
+                set('key','value') 设置表单对象属性的值
+
+             */
+            
+            var xhr  = new XMLHttpRequest()
+            xhr.open('post','http://localhost:3000/formData')
+            xhr.send(formData)
+            xhr.onload = function(){
+                formData.set('age',100)
+                // 如果设置的表单属性不存在 将会创建这个表单属性
+                // 如果设置的表单属性存在 将会覆盖这个属性
+                formData.delete('password')
+                // 删除password属性
+                formData.append('key','value')
+                // 向表单对象中追加属性值
+                // set和append方法的区别是 在属性名已存在的情况下 
+                // set会覆盖已有键名的值，append会保留两个值 （但是一般情况下会取最后 的值 append追加的那个值）
+                if(xhr.status === 200){
+                    console.log(xhr.responseText)
+                }
+            }
+        }
+    </script>
+</body>
+</html>
