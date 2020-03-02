@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">点我发送请求</button>
+    <button id="btn2">2点我发送请求</button>
+    <!-- 1、将不同源的服务器端请求地址写在script标签的src属性中 -->
+    <script>
+        function fn2(data) {
+            console.log(data)
+        }
+    </script>
+    <script>
+        var btn = document.getElementById("btn")
+        var btn2 = document.getElementById("btn2")
+        btn.onclick = function () {
+            jsonp({
+            // 请求地址
+            url: 'http://localhost:3001/better',
+            data:{
+                name:123,
+                age:20
+            },
+            success:function(data){
+                console.log(data)
+            }
+        })
+        }
+        btn2.onclick = function () {
+            jsonp({
+            // 请求地址
+            url: 'http://localhost:3001/better',
+            data:{
+                name:123,
+                age:20
+            },
+            success:function(data){
+                console.log(data)
+            }
+        })
+        }
+        function jsonp(option){
+            //动态创建script标签
+            var script = document.createElement('script')
+            // 拼接字符串的变量
+            var params = '';
+            for(var attr in option.data){
+                params+='&'+attr+'='+option.data[attr]
+            }
+            //为script标签添加src属性
+            var fnName ='myjsonP'+Math.random().toString().replace('.','')
+            // fn2已经不是一个全局函数了 需要把他挂载到window上 让它变成一个全局函数
+            window[fnName] = option.success
+            script.src = option.url+'?callback='+fnName+params
+            // 将script标签追加到页面中
+            document.body.appendChild(script)
+            script.onload = function(){
+                document.body.removeChild(script)
+            }
+        }
+    </script>
+
+</body>
+
+</html>

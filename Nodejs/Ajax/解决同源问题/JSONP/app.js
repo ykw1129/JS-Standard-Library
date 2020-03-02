@@ -16,12 +16,19 @@ app.get('/test',(req,res)=>{
     const result = 'fn({name:"张三"})'
     res.send(result)
 })
-app.get('/better',(req,res)=>{
+/* app.get('/better',(req,res)=>{
     const fnName = req.query.callback
     // 接收客户端传递过来的名称
-    const result = fnName+'({name:"张三"})'
+    const data = JSON.stringify({name:"张三"})
+    const result = fnName+'('+data+')'
     // 将函数名称对应的函数调用代码返回给客户端
-    res.send(result)
+    setTimeout(()=>{
+        res.send(result)
+    },1000)
+
+}) */
+app.get('/better',(req,res)=>{
+    res.jsonp({name:'list',age:20})
 })
 
 app.listen(port, () => console.log(`服务器启动了`))
