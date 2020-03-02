@@ -6,13 +6,31 @@
     <title>Document</title>
 </head>
 <body>
+    <button id="btn">点我发送请求</button>
     <!-- 1、将不同源的服务器端请求地址写在script标签的src属性中 -->
     <script>
-        function fn(data){
+        function fn1(data){
             console.log(data)
         }
     </script>
-    <script src="http://localhost:3001/test"></script>
+    <script>
+        var btn = document.getElementById("btn")
+        btn.onclick = function(){
+           var script =  document.createElement('script');
+            //设置src属性
+            script.src = "http://localhost:3001/better?callback=fn1"
+            // 将script标签追加到页面中去
+            document.body.appendChild(script)
+            // 为script标签添加onload事件
+            script.onload = function(){
+                // 将body中的script标签删除掉
+                document.body.removeChild(script)
+            }
+
+
+        }
+
+    </script>
 
 </body>
 </html>
