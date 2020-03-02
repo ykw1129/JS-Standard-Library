@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <button type="button" id="login">登录</button>
+        <button type="button" id="test">检测用户登录状态</button>
+    </form>
+    <script>
+        var login = document.getElementById("login")
+        var test = document.getElementById("test")
+        var form = document.getElementById("form")
+        var test = document.getElementById("test")
+
+        login.onclick = function(){
+            var formdata = new FormData(form)
+            var xhr = new XMLHttpRequest()
+            xhr.open('post','http://localhost:3001/login')
+            xhr.send(formdata)
+            xhr.onload = function(){
+                if(xhr.status ==200 &&xhr.readyState ==4){
+                    console.log(xhr.responseText)
+                }
+            }
+        }
+        test.onclick = function(){
+            var xhr  = new XMLHttpRequest()
+            xhr.open('get','http://localhost:3001/checkLogin')
+            xhr.withCredentials = true
+            xhr.send()
+            xhr.onload = function(){
+                console.log(xhr.responseText)
+            }
+        }
+    </script>
+</body>
+</html>
