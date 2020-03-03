@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/nprogress.css">
+</head>
+<body>
+    <button type="button" id="btn">点击我</button>
+    <script src="https://cdn.bootcss.com/jquery/2.2.2/jquery.js"></script>
+    <script src="./js/nprogress.js"></script>
+    <script>
+        var btn = document.getElementById("btn")
+        btn.onclick = function(){
+            $.ajax({
+                url:'http://localhost:3000',
+                method:'get',
+                success:function(res){
+
+                },
+                error:function(){
+
+                }
+            }) 
+        }
+        $(document).on('ajaxStart',function(){
+            NProgress.start()
+        })
+        $(document).on('ajaxComplete',function(){
+            NProgress.done()
+        })
+    </script>
+</body>
+</html>
