@@ -18,6 +18,24 @@ module.exports = {
         path:path.join(__dirname,'./dist'),//输出文件存放路径
         filename:'main.js'//输出文件的名称
     },
-    plugins:[HtmlPlugin] //plugins 数组是webpack 打包期间会用到的一些插件列表
+    plugins:[HtmlPlugin], //plugins 数组是webpack 打包期间会用到的一些插件列表
+    module:{
+        // 加载器
+        rules:[
+            {test:/\.css$/,use:['style-loader','css-loader','postcss-loader']},
+            {test:/\.less$/,use:['style-loader','css-loader','less-loader']},
+            {test:/\.scss$/,use:['style-loader','css-loader','sass-loader']},
+            // test表示匹配的文件类型  use表示对应要调用的loader
+            // 注意 use数组中指定的loader顺序是固定的
+            {
+                test:/\.jpg|png|gif|bmp|ttf|eot|svg|woff|woff2$/,
+                use:'url-loader?limit=16940'
+                // ?之后是loader的参数项
+                // limit是指定图片大小，单位是字节 ，只有小于limit大小的图片，才会被转为base64格式
+            },
+            {test:/\.js$/,use:'babel-loader',exclude:/node_modules/}
+            // exclude为排除项,表示babel-loader不需要处理node_modules中的js文件
+        ]
+    }
 
 }

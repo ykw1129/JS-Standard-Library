@@ -1,0 +1,14 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+body ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+body div {
+  width: 400px;
+  height: 200px;
+  background: url(../img/a.jpg);
+}
