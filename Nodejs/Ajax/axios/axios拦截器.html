@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="get1()">点击我</button>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let cancel;
+        axios.defaults.baseURL = 'http://localhost:3000'
+        axios.interceptors.request.use(
+          config=>{
+            if(typeof cancel == 'function'){
+                cancel('强制取消请求')
+            }
+            config.cancelToken = new axios.CancelToken(c=>{
+                cancel = c
+            })
+            return config
+        })
+        axios.interceptors.response.use(res=>{
+            cancel = null
+            return res
+        },err=>{
+            if(axios.isCancel(err)){
+                // console.log("被取消请求的错误"+ err.message)
+                return new Promise(()=>{})
+                  // 中断promise链
+            }else{
+                cancel =null
+                return new Promise.reject(err)
+                // 错误向下传递
+            }
+
+        })
+        function get1(){
+            axios.get('/first').then((res)=>{
+            console.log(res)
+            },err=>{
+                console.log(err)
+            })
+        }
+
+    </script>
+</body>
+</html>

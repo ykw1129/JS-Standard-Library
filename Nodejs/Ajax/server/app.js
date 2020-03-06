@@ -12,12 +12,13 @@ app.use(bodyParser.json())
 // app.use(bodyParser.urlencoded({extended:true}))
 // 调用urlencoded该方法 就表示要采用 application/x-www-form-urlencoded
 app.get('/first',(req,res)=>{
+    res.header('Access-Control-Allow-Origin','*')
+    res.header('Access-Control-Allow-Methods','get,post')
     res.send('hello ajax')
 })
 app.post('/first',(req,res)=>{
     res.send('hello ajax')
 })
-
 app.get('/responseData',(req,res)=>{
     res.send({"name":"zs"})
 })

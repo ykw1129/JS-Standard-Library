@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="get()">点击</button>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        axios.defaults.baseURL = 'http://localhost:3000'
+        async function wait(){
+            const data = await axios.get('/first')
+            // 异步
+            console.log(123) 
+            // 同步
+            return data.data
+        }
+        function get(){
+            wait().then(data=>{
+            console.log(data)
+        })
+        }
+    </script>
+</body>
+</html>
