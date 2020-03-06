@@ -6,7 +6,7 @@ function show(){
 
 export default{
     // 每个模块只允许一次 default 默认导出
-    a,b,show
+    a,b,c,show
 }
 export let d = 40
 export let e = 50
