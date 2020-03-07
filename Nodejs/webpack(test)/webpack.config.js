@@ -11,6 +11,7 @@ const HtmlPlugin = new HtmlWebpackPlugin({
     template:'./src/index.html', //指定要用到的模板文件
     filename:'index.html'          //指定生成的文件名称，该文件存在于内存中，在目录中不显示
 })
+const VueLoaderPlugins = require('vue-loader/lib/plugin')
 module.exports = {
     mode:"development" ,//mode 用来指定构建模式
     entry:path.join(__dirname,'./src/index.js'),//打包入口路径
@@ -18,7 +19,7 @@ module.exports = {
         path:path.join(__dirname,'./dist'),//输出文件存放路径
         filename:'main.js'//输出文件的名称
     },
-    plugins:[HtmlPlugin], //plugins 数组是webpack 打包期间会用到的一些插件列表
+    plugins:[HtmlPlugin,new VueLoaderPlugins()], //plugins 数组是webpack 打包期间会用到的一些插件列表
     module:{
         // 加载器
         rules:[
@@ -33,8 +34,9 @@ module.exports = {
                 // ?之后是loader的参数项
                 // limit是指定图片大小，单位是字节 ，只有小于limit大小的图片，才会被转为base64格式
             },
-            {test:/\.js$/,use:'babel-loader',exclude:/node_modules/}
+            {test:/\.js$/,use:'babel-loader',exclude:/node_modules/},
             // exclude为排除项,表示babel-loader不需要处理node_modules中的js文件
+            {test:/\.vue$/,loader:'vue-loader'}
         ]
     }
 
