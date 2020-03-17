@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const fs = require('fs')
 const promisify = require('util').promisify
+// 把原来的异步回调方法改成返回 Promise 实例的方法
 // TODO:promisify的作用  稍后需了解
 const readFile = promisify(fs.readFile)
 const port = 3000
