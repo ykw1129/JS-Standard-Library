@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>css布局-瀑布流的实现</title>
+    <style type="text/css">
+      .box {
+        position: relative;
+        width: 500px;
+        min-height: 100px;
+        margin: 100px auto;
+        background: #eeeeee;
+      }
+      .item {
+        position: absolute;
+        width: 120px;
+        left: 0;
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="item" style="height: 40px; background: red;"></div>
+      <div class="item" style="height: 50px; background: blue;"></div>
+      <div class="item" style="height: 100px; background: green;"></div>
+      <div class="item" style="height: 60px; background: gray;"></div>
+      <div class="item" style="height: 50px; background: orange;"></div>
+      <div class="item" style="height: 20px; background: yellow;"></div>
+      <div class="item" style="height: 40px; background: red;"></div>
+      <div class="item" style="height: 50px; background: blue;"></div>
+      <div class="item" style="height: 100px; background: green;"></div>
+      <div class="item" style="height: 120px; background: gray;"></div>
+      <div class="item" style="height: 58px; background: orange;"></div>
+      <div class="item" style="height: 36px; background: yellow;"></div>
+    </div>
+    <script type="text/javascript">
+      const BOX_WIDTH = document.querySelector('.box').offsetWidth //瀑布流外层盒子的宽度
+      const ITEM_WIDTH = document.querySelector('.item').offsetWidth //瀑布流内层盒子的宽度
+      const COLUMN = Math.floor(BOX_WIDTH/ITEM_WIDTH)   //根据宽度计算可渲染的列数
+      const MARGIN = (BOX_WIDTH - ITEM_WIDTH*COLUMN)/(COLUMN-1) // 根据宽度计算每一列的间距
+      const MARGINTOP = 10 //固定设置每一个小盒子上下间距是10
+      let height_arr = new Array(COLUMN).fill(0)  //定义一个长度等同与列数的数组用来存储每一列的高度，初始值均为0
+      let item = document.querySelectorAll('.item')//遍历每一个小盒子，确定小盒子的位置
+      for(let i = 0; i < item.length; i++) {
+        let index = height_arr.indexOf(Math.min.apply(null, height_arr))
+        item[i].style.left = (ITEM_WIDTH + MARGIN) * index + 'px'
+        item[i].style.top = height_arr[index] + MARGINTOP + 'px'
+        height_arr[index] += item[i].offsetHeight + MARGINTOP
+      }//将数组中最大的值，即最高的那一列的高度赋给外层盒子
+      document.querySelector('.box').style.height = Math.max.apply(null, height_arr) + 'px'
+    </script>
+  </body>
+</html>
