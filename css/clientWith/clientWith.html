@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 300px;
+            height: 300px;
+            background-color: aqua;
+            margin: auto;
+            border: 2px solid #333;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+    <script>
+        const container = document.getElementsByClassName('container')[0]
+        console.log(container.clientHeight)
+/*        1，clientWidth的实际宽度
+
+        clientWidth = width+左右padding
+
+        2，clientHeigh的实际高度
+
+        clientHeigh = height + 上下padding 
+
+        3，clientTop的实际宽度
+
+        clientTop = boder.top(上边框的宽度)
+
+        4，clientLeft的实际宽度
+
+       clientLeft = boder.left(左边框的宽度) */
+    </script>
+</body>
+</html>
