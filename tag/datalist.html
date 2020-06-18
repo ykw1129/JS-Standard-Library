@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="input" type="text" name="words" list="words" />
+    <datalist id="words" style="width: 100px;">
+      <option label="" value=""></option>
+    </datalist>
+    <script>
+      "use strict";
+      const searchCallback = (data) => {
+        words.innerHTML = "";
+        const { s } = data;
+        console.log(s);
+        const fragment = document.createDocumentFragment();
+        s.forEach((res, idx) => {
+          const option = document.createElement("option");
+          option.label = idx;
+          option.value = res;
+          fragment.appendChild(option);
+        });
+        words.appendChild(fragment);
+      };
+      input.addEventListener("keyup", (ev) => {
+        const createdScript = document.createElement("script");
+        createdScript.src = `https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=${input.value}&cb=searchCallback`;
+        document.body.appendChild(createdScript);
+        document.body.removeChild(createdScript);
+      });
+    </script>
+  </body>
+</html>
