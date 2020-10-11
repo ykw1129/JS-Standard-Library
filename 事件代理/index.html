@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+        1<button data-id="1">删除</button>
+    </div>
+    <div>
+        2<button data-id="2">删除</button>
+    </div>
+    <div>
+        3<button data-id="3">删除</button>
+    </div>
+  </body>
+  <script>
+          let body = document.querySelector("body");
+          let divList = document.querySelectorAll("div");
+    const deleteItem = (id) => {
+
+
+    //   console.log(body.children[id]);
+
+      body.removeChild(body.childNodes[id])
+    };
+    // 一般的用法
+/*     let btnList = document.getElementsByTagName("button");
+    Array.prototype.forEach.call(btnList, (btn) => {
+      btn.addEventListener("click", function (e) {
+        deleteItem(this.dataset.id);
+      });
+    }); */
+    // 事件代理
+    body.addEventListener('click', function (e) {
+  if (e.target.tagName === 'BUTTON') {
+    deleteItem(e.target.dataset.id)
+  }
+})
+
+  </script>
+</html>
